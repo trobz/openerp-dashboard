@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+    
+        <record id="type_output" model="dashboard.field.type">
+            <field name="name">output</field>
+        </record>
+        <record id="type_period" model="dashboard.field.type">
+            <field name="name">period</field>
+        </record>
+        <record id="type_domain" model="dashboard.field.type">
+            <field name="name">domain</field>
+        </record>
+        <record id="type_order" model="dashboard.field.type">
+            <field name="name">order_by</field>
+        </record>
+        <record id="type_group" model="dashboard.field.type">
+            <field name="name">group_by</field>
+        </record>
+    
+    </data>
+</openerp>

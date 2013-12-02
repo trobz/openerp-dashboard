@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+        
+        <record id="dashboard_field_form" model="ir.ui.view">
+            <field name="name">dashboard.field.form</field>
+            <field name="model">dashboard.field</field>
+            <field name="arch" type="xml">
+                <form string="Field">
+                    <group>
+                        <field name="name"/>
+                        <field name="metric_ids" widget="many2many_tags" placeholder="Metrics..." />
+                        <field name="type_ids" widget="many2many_tags" placeholder="Types..." />
+                    </group>
+                    <group>
+                        <field name="sequence" />
+                        <field name="reference" />
+                        <field name="sql_name" />
+                        <field name="domain_field_path" />
+                        <field name="field_id" />
+                    </group>
+                </form>
+            </field>
+        </record>
+        
+                
+        <record id="dashboard_field_tree" model="ir.ui.view">
+            <field name="name">dashboard.field.tree</field>
+            <field name="model">dashboard.field</field>
+            <field name="field_parent">fields</field>
+                
+            <field name="arch" type="xml">
+                <tree string="Fields">
+                    <field name="name" />
+                    <field name="sequence" />
+                    <field name="type_ids" />
+                    <field name="reference" />
+                    <field name="sql_name" />
+                    <field name="field_id" />
+                </tree>
+            </field>
+        </record>
+        
+    </data>
+</openerp>

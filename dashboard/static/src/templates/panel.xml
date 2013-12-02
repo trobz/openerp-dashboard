@@ -1,0 +1,124 @@
+<template>
+
+<t t-name="TrobzDashboard.panel">
+    <div id="toolbar"></div>
+    <div id="widgets"></div>
+</t>
+
+
+<t t-name="TrobzDashboard.toolbar.print">
+    <div class="section board_action left">
+        <span class="button back_action"><i class="icon-signout icon-rotate-180"></i></span>
+    </div>
+    
+    <div class="section board_action right">
+        <span class="button print_action"><i class="icon-print"></i></span>
+    </div>
+    
+</t>
+
+<t t-name="TrobzDashboard.toolbar">
+
+    <!-- timebar view -->
+    
+    <div id="timebar"></div>
+
+    <!-- general buttons -->
+    
+    
+    
+    <div class="section board_action right">
+        <span class="button fullscreen_action"><i class="icon-resize-full"></i></span>
+    </div>
+    
+    <div class="section board_action right">
+        <span class="button print_action"><i class="icon-print"></i></span>
+    </div>
+    
+    <div class="section board_action right">
+        <span class="mode">
+            <t t-call="TrobzDashboard.toolbar.list" />
+        </span>
+    </div>    
+
+    <div class="section board_action right">
+        <span class="button search_action"><i class="icon-search"></i></span>
+    </div>
+    
+    <!-- search view -->
+    
+    <div id="searchbar"></div>
+</t>
+
+
+
+<t t-name="TrobzDashboard.timebar">
+    <div class="section period_name">
+        <select>
+            <option value="custom">Custom</option>
+            <option value="day">Day</option>
+            <option value="week">Week</option>
+            <option value="month">Month</option>
+            <option value="quarter">Quarter</option>
+            <option value="semester">Semester</option>
+            <option value="year">Year</option>
+            <option value="year_to_date">Year to date</option>
+        </select>
+    </div>
+    <div class="section period_type">
+        <span class="button rolling" title="Rolling" data-type="rolling"><i class="icon-play"></i></span>
+        <span class="button last_period" title="Last full period" data-type="last_period"><i class="icon-step-backward"></i></span>
+        <span class="button calendar" title="Period in progress" data-type="calendar"><i class="icon-step-forward"></i></span>
+    </div>
+
+
+    <div class="section period_selector">
+        <div class="period_dates">
+            <span class="daterange"><t t-esc="start + ' - ' + end" /></span>
+            <i class="icon-chevron-down"></i>
+        </div>
+    </div>
+
+</t>
+
+<t t-name="TrobzDashboard.toolbar.sliding">
+    
+     <ul class="pager oe_pager_group">
+        <li>
+            <a t-att-class="'oe_i prev-widget' + (previous ? '' : ' disabled')" 
+               data-pager-action="previous" 
+               type="button">(</a>
+        </li>
+        <li>
+            <a t-att-class="'oe_i next-widget' + (next ? '' : ' disabled')" 
+               data-pager-action="next" 
+               type="button">)</a>
+        </li>
+    </ul>
+    
+    <select class="sliding_timeout">
+        <option value="5000">5 sec.</option>
+        <option value="10000">10 sec.</option>
+        <option value="30000">30 sec.</option>
+        <option value="60000">1 min.</option>
+        <option value="300000">5 min.</option>
+        <option value="900000">15 min.</option>
+    </select>
+    <span class="button pause_sliding"><i class="icon-pause"></i></span>
+    <span class="button list_action"><i class="icon-stop"></i></span>
+</t>
+
+<t t-name="TrobzDashboard.toolbar.list">
+    <span class="button sliding_action"><i class="icon-play"></i></span>
+</t>
+
+
+
+
+
+<t t-name="TrobzDashboard.searchbar">
+    <span>search things here</span>    
+</t>
+
+
+</template>

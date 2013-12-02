@@ -1,0 +1,91 @@
+#toolbar {
+    margin: 0;
+    border-bottom: 2px solid #ddd;
+    background: #efefef;
+    overflow: auto;
+    
+}
+
+#toolbar .section {
+    float: left;
+    border-right: 1px solid #ddd;
+    margin: 0;
+    padding: 5px 10px;
+    height: 28px;
+}
+
+#toolbar .section.right {
+    float: right;
+    border-left: 1px solid #ddd;
+    border-right: none;
+}
+
+#toolbar .current_period span {
+    font-size: 18px;
+    vertical-align: middle;
+    display: inline-block;
+    padding: 3px 0 0 0;
+}
+
+#toolbar .button.rolling {
+    border-top-left-radius: 0;
+    border-bottom-left-radius: 0;
+}
+
+#toolbar .button.calendar {
+    /*margin: 0 0 0 -5px;*/
+    border-top-left-radius: 0;
+    border-bottom-left-radius: 0;
+}
+#toolbar .button.last_period {
+    /*margin: 0 0 0 -5px;*/
+    border-top-right-radius: 0;
+    border-bottom-right-radius: 0;
+}
+
+#toolbar .button.selected {
+    color: rgb(48, 132, 199);
+    border-color: rgba(82, 168, 236, 0.8);
+    -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 4px rgba(82, 168, 236, 0.6);
+    -moz-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 4px rgba(82, 168, 236, 0.6);
+    box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 4px rgba(82, 168, 236, 0.6);
+    position: relative;
+    z-index: 1;
+}
+
+
+#toolbar .button i {
+    font-size: 14px;
+}
+
+
+#toolbar .period_type .button i {
+    margin: 0 4px 0 2px;
+}    
+
+#toolbar .period_name select {
+    cursor: pointer;
+}
+
+#toolbar .period_dates {
+    border: 1px solid #ddd;
+    background: #fefefe;
+    padding: 3px 4px;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+#toolbar .daterange {
+    text-align: center;
+    color: #666;
+}
+
+
+#toolbar #searchbar {
+    clear: both;
+    border-top: 1px solid #cacaca;
+}
+
+#toolbar .oe_pager_group {
+    margin: 0 5px;
+}

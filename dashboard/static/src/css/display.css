@@ -1,0 +1,178 @@
+/*
+ * widget.display
+ */
+
+#trobz_board .display {
+    overflow: auto;
+}
+
+
+/*
+ * display.numeric
+ */
+
+#trobz_board .numeric {
+    margin-bottom: 50px;
+}
+
+#trobz_board .numeric dl { 
+    position: relative;
+}
+
+#trobz_board .numeric dt { 
+    font-size: 22px;
+    margin: 0 10px;
+    border-bottom-style: solid;
+    border-bottom-width: 3px;
+    clear: right;
+}
+
+#trobz_board .numeric dd { 
+    font-size: 26px;
+    font-weight: bolder;
+    float: right;    
+    margin: 0 10px;
+}
+
+
+#trobz_board .numeric         { color: #999; }
+#trobz_board .numeric .blue   { color: rgba(105, 126, 209, 0.7); }
+#trobz_board .numeric .yellow { color: rgba(235, 227,  21, 0.7); }
+#trobz_board .numeric .red    { color: rgba(218,  43,  43, 0.7); }
+#trobz_board .numeric .green  { color: rgba(59,  172,  54, 0.7); }
+#trobz_board .numeric .orange { color: rgba(248, 177,  25, 0.7); }
+#trobz_board .numeric .black  { color: rgba(19,  19,   19, 0.7); }
+
+#trobz_board .numeric            {  border-bottom-color: #999; }
+#trobz_board .numeric  dt.blue   {  border-bottom-color: rgba(105, 126, 209, 0.7); }
+#trobz_board .numeric  dt.yellow {  border-bottom-color: rgba(235, 227,  21, 0.7); }
+#trobz_board .numeric  dt.red    {  border-bottom-color: rgba(218,  43,  43, 0.7); }
+#trobz_board .numeric  dt.green  {  border-bottom-color: rgba(59,  172,  54, 0.7); }
+#trobz_board .numeric  dt.orange {  border-bottom-color: rgba(248, 177,  25, 0.7); }
+#trobz_board .numeric  dt.black  {  border-bottom-color: rgba(19,  19,   19, 0.7); }
+
+/*
+ * display list
+ */
+
+#trobz_board .list tbody {
+    border-bottom: 2px solid #cacaca;
+}
+
+
+#trobz_board .widget .pager ul {
+    background: #f5f5f5;
+    color: rgb(76, 76, 76); 
+    cursor: pointer;
+}
+#trobz_board .pager li a:hover {
+    background: #fdfdfd;
+    color:  rgb(48, 132, 199);
+}
+
+
+
+#trobz_board .oe_list_content > tbody {
+    cursor: inherit;
+}
+
+#trobz_board .sortable {
+    cursor: pointer;
+    color: #7c7bad;
+}
+
+
+#trobz_board .sortable div:after {
+    float: right;
+    margin-right: 6px;
+    content: "";
+    margin-top: 7px;
+    border-width: 0 4px 4px;
+    border-style: solid;
+    border-color: black transparent;
+    filter: alpha(opacity=60);
+    opacity: 0.6;
+    visibility: hidden;
+}
+
+#trobz_board .sortable.asc div:after {
+    visibility: visible;
+}
+
+#trobz_board .sortable.desc div:after {
+    border-bottom: none;
+    border-left: 4px solid transparent;
+    border-right: 4px solid transparent;
+    border-top: 4px solid black;
+    visibility: visible;
+}
+
+
+#trobz_board .oe_list_content .oe_group_header {
+    background-color: #ededed;
+    background-image: -webkit-gradient(linear, left top, left bottom, from(#fcfcfc), to(#dedede));
+    background-image: -webkit-linear-gradient(top, #fcfcfc, #dedede);
+    background-image: -moz-linear-gradient(top, #fcfcfc, #dedede);
+    background-image: -ms-linear-gradient(top, #fcfcfc, #dedede);
+    background-image: -o-linear-gradient(top, #fcfcfc, #dedede);
+    background-image: linear-gradient(to bottom, #fcfcfc, #dedede);
+    cursor: pointer;
+}
+
+
+/*
+ * display.graph
+ */
+
+#trobz_board .graph {
+    margin: 20px auto;
+}
+
+#trobz_board .graph .flotr-mouse-value ul,
+#trobz_board .graph .flotr-mouse-value ul li {
+    padding: 0;
+    margin: 0;
+    list-style: none;
+}
+
+#trobz_board .graph .flotr-mouse-value span {
+    display: inline-block;
+    min-width: 120px;
+}
+
+#trobz_board .graph .flotr-mouse-value b {
+    display: inline-block;
+    margin: 0 0 0 5px;
+}
+
+#trobz_board .graph .noresult {
+    display: block;
+    margin: 0px auto 0px;
+    font-size: 5em;
+    width: 250px;
+    color: #ddd;
+    padding: 18% 0;
+}
+
+#trobz_board .graph h4 {
+    font-size: 2em;
+}
+
+#trobz_board .graph ul,
+#trobz_board .graph li {
+    list-style: none;
+    font-size: 1.2em;
+}
+
+#trobz_board .graph .label {
+    font-weight: bold;
+}
+
+#trobz_board .graph .value {
+    font-style: italic;
+    margin: 0 0 0 1em;
+}
+
+#trobz_board .daterangepicker.dropdown-menu.opensright {
+	height: 180px;
+}

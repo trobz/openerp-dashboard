@@ -1,0 +1,189 @@
+@media print {
+    
+#print-dashboard.print #toolbar {
+    display: none;
+}
+
+#print-dashboard > div {
+    border-top: none !important;
+    border-bottom: none !important;
+    border-left: none !important;
+    border-right: none !important;
+}
+
+#print-dashboard.print #widgets span.remove_widget,
+#print-dashboard.print #widgets span.remove_widget i {
+    display: none !important;
+}
+
+#print-dashboard.print .widget {
+    page-break-after: always !important;
+}
+
+#print-dashboard.print .widget:last-child {
+    page-break-after: avoid !important;
+}
+
+}
+
+/* printing view */
+
+#print-dashboard.print #widgets * {
+    border-top: none !important;
+    border-bottom: none !important;
+    border-left: none !important;
+    border-right: none !important;
+    background: none  !important;
+    box-shadow: none  !important;
+    -webkit-box-shadow: none  !important;
+    overflow: visible !important;
+}
+
+#print-dashboard #toolbar {
+    position: fixed;
+    border: 1px solid #ddd;
+    opacity: 0.6;
+    left: 0px;
+    border-top-right-radius: 5px;
+    border-bottom-right-radius: 5px;
+}
+
+#print-dashboard {
+    background: url(/web/static/src/img/form_sheetbg.png) repeat;
+}
+
+#print-dashboard > div {
+    width: 511pt !important;
+    margin: 0 auto;
+    border-left: 1px solid #ddd;
+    border-right: 1px solid #ddd;
+    padding: 10px;
+    background: white;
+}
+
+#print-dashboard #toolbar:hover {
+    opacity: 1;
+}
+
+#print-dashboard.print .search .current {
+    float: none !important;
+    margin: 0 0 0 65px !important;
+}
+
+#print-dashboard.print #widgets h1,
+#print-dashboard.print .widget .widget_help h3 {
+    display: block;
+}
+
+    
+#print-dashboard.print .widget {
+    width: 511pt !important;
+    float: none !important;
+    position: relative !important;
+}
+
+#print-dashboard.print .widget .head h2 {
+    text-align: left !important;
+    font-size: 16pt !important;
+    text-decoration: underline !important;
+}
+
+
+#print-dashboard.print .widget .graph,
+#print-dashboard.print .widget canvas {
+    width: 100% !important;
+}
+
+
+#print-dashboard.print #widgets i,
+#print-dashboard.print .foot,
+#print-dashboard.print .trobz-pager,
+#print-dashboard.print .widget .head .button {
+    display: none !important;
+}
+
+#print-dashboard.print #widgets .search.hidden {
+    margin: 0 0 20px 0;
+    padding: 10px;
+}
+
+#print-dashboard.print .search span.search_action .search-type {
+    display: block !important;
+    font-size: 10pt;
+}
+
+#print-dashboard.print .search .search-subject {
+    clear: both;    
+}
+
+
+
+#print-dashboard.print #widgets .remove_widget,
+#print-dashboard.print #widgets .remove_widget i {
+    display: inline !important;
+}
+
+#print-dashboard.print #widgets .remove_widget {
+    position: absolute;
+    right: 10px;
+    top: 0px;
+}
+
+/*
+ * display.numeric
+ */
+
+#print-dashboard.print .numeric {
+    margin-bottom: 50px;
+}
+
+#print-dashboard.print .numeric dl { 
+    position: relative;
+}
+
+#print-dashboard.print .numeric dt { 
+    font-size: 22px;
+    margin: 0 10px;
+    border-bottom-style: solid !important;
+    border-bottom-width: 3px !important;
+    clear: right;
+}
+
+#print-dashboard.print .numeric dd { 
+    font-size: 26px;
+    font-weight: bolder;
+    float: right;    
+    margin: 0 10px;
+}
+
+
+#print-dashboard.print .numeric         { color: #999; }
+#print-dashboard.print .numeric .blue   { color: rgba(105, 126, 209, 0.7); }
+#print-dashboard.print .numeric .yellow { color: rgba(235, 227,  21, 0.7); }
+#print-dashboard.print .numeric .red    { color: rgba(218,  43,  43, 0.7); }
+#print-dashboard.print .numeric .green  { color: rgba(59,  172,  54, 0.7); }
+#print-dashboard.print .numeric .orange { color: rgba(248, 177,  25, 0.7); }
+#print-dashboard.print .numeric .black  { color: rgba(19,  19,   19, 0.7); }
+
+#print-dashboard.print .numeric            {  border-bottom-color: #999; }
+#print-dashboard.print .numeric  dt.blue   {  border-bottom-color: rgba(105, 126, 209, 0.7); }
+#print-dashboard.print .numeric  dt.yellow {  border-bottom-color: rgba(235, 227,  21, 0.7); }
+#print-dashboard.print .numeric  dt.red    {  border-bottom-color: rgba(218,  43,  43, 0.7); }
+#print-dashboard.print .numeric  dt.green  {  border-bottom-color: rgba(59,  172,  54, 0.7); }
+#print-dashboard.print .numeric  dt.orange {  border-bottom-color: rgba(248, 177,  25, 0.7); }
+#print-dashboard.print .numeric  dt.black  {  border-bottom-color: rgba(19,  19,   19, 0.7); }
+
+
+#print-dashboard.print #widgets table {
+    width: 511pt !important;
+    
+}
+
+#print-dashboard.print #widgets table th {
+    background: #efefef !important;
+}
+
+#print-dashboard.print #widgets table th,
+#print-dashboard.print #widgets table td {
+    border: 1px solid #999 !important;
+}

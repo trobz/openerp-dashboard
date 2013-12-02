@@ -1,0 +1,58 @@
+<template>
+
+<t t-name="TrobzDashboard">
+    <div id="trobz_board"></div>
+</t>
+
+<t t-name="TrobzDashboard.print">
+    <div id="print-dashboard" class="print"></div>
+</t>
+
+<t t-name="TrobzDashboard.metric_info">
+    <t t-if="has_period">
+        <div class="period_info metric_info">
+            <span class="domain_title">
+                <i class="icon-calendar"></i>
+            </span>
+             
+            <div class="current">
+                <span class="search_string">from</span>
+                
+                <div class="criterion">
+                    <span class="search_value"><t t-esc="period.start" /></span>
+                </div>
+                 
+                <span class="search_string">to</span>
+                
+                <div class="criterion">
+                    <span class="search_value"><t t-esc="period.end" /></span>
+                </div>
+                 
+                <span class="search_string">on</span>
+                
+                <div class="criterion">
+                    <span class="search_field"><t t-esc="period_field.get('name')" /></span>
+                </div>
+            </div>
+        </div>
+    </t>
+    
+    <t t-if="has_domain">
+        <div class="domain_info metric_info">
+            <span class="domain_title">
+                <i class="icon-filter"></i>
+            </span>
+            <div class="current">
+                <t t-call="TrobzDashboard.search.domain.string">
+                    <t t-set="groups" t-value="groups" />
+                    <t t-set="operators" t-value="operators" />
+                    <t t-set="group_size" t-value="group_size" />
+                </t>
+            </div>
+        </div>
+    </t>
+    
+    
+</t>
+
+</template>

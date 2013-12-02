@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+        
+        <record id="dashboard_board_tree" model="ir.ui.view">
+            <field name="name">dashboard.board.tree</field>
+            <field name="model">dashboard.board</field>
+            <field name="field_parent">widgets</field>
+            
+            <field name="arch" type="xml">
+                <tree string="Board" version="7.0">
+                    <field name="name" />
+                    
+                    <field name="period_name" />
+                    <field name="period_type" />
+                    <field name="period_start_at" />
+                    <field name="period_end_at" />
+                    
+                    <field name="widget_ids" />
+                </tree>
+            </field>
+        </record>
+        
+        <record id="dashboard_board_form" model="ir.ui.view">
+            <field name="name">dashboard.board.form</field>
+            <field name="model">dashboard.board</field>
+            <field name="arch" type="xml">
+                <form string="Board" version="7.0">
+                    <group>
+                        <field name="name" />
+                        
+                        <field name="period_name" />
+                        <field name="period_type" />
+                        <field name="period_start_at" />
+                        <field name="period_end_at" />
+                        
+                        <field name="global_field_refs" widget="serialized" />
+                    </group>
+                    <notebook>
+                        <page string="Widgets">
+                            <field name="widget_ids" widget="many2many" />
+                        </page>
+                    </notebook>
+                
+                </form>
+            </field>
+            
+            
+            
+        </record>
+        
+    </data>
+</openerp>
