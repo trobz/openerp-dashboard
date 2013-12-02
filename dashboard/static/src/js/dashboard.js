@@ -71,7 +71,6 @@ openerp.unleashed.module('dashboard').ready(function(instance, dashboard, _, Bac
                     })    
                 };
                 
-                
                 //bind special event 
                 self.bind();
                 
@@ -361,5 +360,4 @@ openerp.unleashed.module('dashboard').ready(function(instance, dashboard, _, Bac
             this._super();
         }
     });     
-
 });
