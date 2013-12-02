@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+        
+        <record id="dashboard_widget_form" model="ir.ui.view">
+            <field name="name">dashboard.widget.form</field>
+            <field name="model">dashboard.widget</field>
+            <field name="arch" type="xml">
+                <form string="Widget">
+                    <notebook>
+                        <page string="General">
+                            <group>
+                                <field name="name" />
+                                <field name="type" />
+                                <field name="method" />
+                                <field name="limit" />
+                            </group>
+                        </page>    
+                        <page string="Metrics">
+                            <field name="metric_ids" widget="one2many_list" />
+                        </page>
+                    </notebook>    
+                </form>
+            </field>                               
+        </record>  
+       
+        <record id="dashboard_widget_tree" model="ir.ui.view">
+            <field name="name">dashboard.widget.tree</field>
+            <field name="model">dashboard.widget</field>
+                              
+            <field name="arch" type="xml">
+                <tree string="Widgets">
+                    <field name="name"/>
+                    <field name="type"/>
+                    <field name="method" />
+                            
+                    <field name="board_ids"/>
+                    <field name="metric_ids"/>
+                </tree>
+           </field>
+        </record>
+    </data>
+</openerp>

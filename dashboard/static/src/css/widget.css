@@ -1,0 +1,175 @@
+/*
+ * widget
+ */
+
+#board .widget {
+    width: 100%;
+}
+
+.list .widget {
+    float: left;
+    position: relative;
+}
+
+.sliding .widget {
+    position: absolute;
+    top: 0;
+}
+
+/*#board .widget.size1 { width: 10%; }*/
+/*#board .widget.size2 { width: 20%; }*/
+/*#board .widget.size3 { width: 30%; }*/
+/*#board .widget.size4 { width: 40%; }*/
+/*#board .widget.size5 { width: 50%; }*/
+/*#board .widget.size6 { width: 60%; }*/
+/*#board .widget.size7 { width: 70%; }*/
+/*#board .widget.size8 { width: 80%; }*/
+/*#board .widget.size9 { width: 90%; }*/
+/*#board .widget.size10 { width: 100%; }*/
+
+#board .widget.size1 { width: 8.33%; }
+#board .widget.size2 { width: 16.66%; }
+#board .widget.size3 { width: 24.99%; }
+#board .widget.size4 { width: 33.32%; }
+#board .widget.size5 { width: 41.65%; }
+#board .widget.size6 { width: 48.98%; }
+#board .widget.size7 { width: 58.31%; }
+#board .widget.size8 { width: 66.64%; }
+#board .widget.size9 { width: 74.97%; }
+#board .widget.size10 { width: 83.3%; }
+#board .widget.size11 { width: 91.63%; }
+#board .widget.size12 { width: 100%; }
+
+
+#board .widget .remove_widget {
+    display: none;
+}
+
+#board .widget .pager {
+    position: absolute;
+    right: 42px;
+    top: 5px;
+}
+
+#board .widget .widget_content {
+    border: 1px solid #c8c8d3;
+    -moz-box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+    -webkit-box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+    margin: 10px;
+    background: #f8f8f8;
+}
+
+
+#board .widget .head {
+    height: 26px;
+    overflow: auto;
+    padding: 5px 0;
+    position: relative;
+    border-bottom: 1px solid #cacaca;
+    background-color: #ededed;
+    background-image: -webkit-gradient(linear, left top, left bottom, from(#fcfcfc), to(#dedede));
+    background-image: -webkit-linear-gradient(top, #fcfcfc, #dedede);
+    background-image: -moz-linear-gradient(top, #fcfcfc, #dedede);
+    background-image: -ms-linear-gradient(top, #fcfcfc, #dedede);
+    background-image: -o-linear-gradient(top, #fcfcfc, #dedede);
+    background-image: linear-gradient(to bottom, #fcfcfc, #dedede);
+    -moz-box-shadow: 0 1px 0 rgba(255, 255, 255, 0.4), 0 0 9px rgba(0, 0, 0, 0.1);
+    -webkit-box-shadow: 0 1px 0 rgba(255, 255, 255, 0.4), 0 0 9px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 1px 0 rgba(255, 255, 255, 0.4), 0 0 9px rgba(0, 0, 0, 0.1);
+}
+
+#board .widget .head .loader {
+    font-size: 20px;
+    position:absolute;
+    left:25px;
+    top:5px;
+}
+
+#board .widget .head .loader.invisible {
+    visibility: hidden;
+}
+
+#board .widget .head .loader.icon-warning-sign {
+    color: #900;
+}
+
+#board .widget .head h2 {
+    text-align: center;
+    margin: 0;
+    padding: 0;
+    line-height: 26px;
+}
+
+#board .widget .head .button {
+    position: absolute;
+    right: 10px;
+    top: 5px;
+}
+
+#board .widget .head .icon-question-sign{
+    position: absolute;
+    left: 5px;
+    top: 5px;
+    cursor: help;
+}
+
+#board .widget .widget_help {
+    position:absolute;
+    left:30px;
+    top:28px;
+    z-index:2;
+    border:1px solid #cacaca;
+    background:white;
+    padding:5px;
+    border-radius: 5px;
+     -moz-box-shadow: 0 1px 0 rgba(255, 255, 255, 0.4), 0 0 9px rgba(0, 0, 0, 0.1);
+    -webkit-box-shadow: 0 1px 0 rgba(255, 255, 255, 0.4), 0 0 9px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 1px 0 rgba(255, 255, 255, 0.4), 0 0 9px rgba(0, 0, 0, 0.1);
+}
+
+#board .widget .widget_help ul,
+#board .widget .widget_help li{
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+#board .widget .widget_help h3 {
+    display: none;
+}
+
+#board .widget .body {
+}
+
+
+
+/*
+ * widget.status
+ */
+
+#board .status {
+    overflow: auto;
+    background: #f3f3f3;
+    border-top: 2px solid #cacaca;
+    padding: 2px 0;
+    color: #999;
+    
+    background-color: #ededed;
+    background-image: -webkit-gradient(linear, left top, left bottom, from(#fcfcfc), to(#dedede));
+    background-image: -webkit-linear-gradient(top, #fcfcfc, #dedede);
+    background-image: -moz-linear-gradient(top, #fcfcfc, #dedede);
+    background-image: -ms-linear-gradient(top, #fcfcfc, #dedede);
+    background-image: -o-linear-gradient(top, #fcfcfc, #dedede);
+    background-image: linear-gradient(to bottom, #fcfcfc, #dedede);
+}
+
+#board .status .metrics {
+    margin: 0 5px;
+}
+
+#board .status .updated_at {
+    float: right;
+    margin: 0 10px 0 0;
+    font-style: italic;
+}

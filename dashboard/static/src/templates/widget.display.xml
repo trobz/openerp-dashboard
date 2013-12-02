@@ -1,0 +1,99 @@
+<template>
+    
+    <!-- NUMBER -->
+    
+    <t t-name="Dashboard.widget.display.numeric">
+        <dl></dl>
+    </t>
+    
+    <t t-name="Dashboard.widget.display.numeric.item">
+        <dt t-att-class="className"><t t-esc="label" /></dt>
+        <dd t-att-class="className"><t t-esc="value" /></dd>
+    </t>
+    
+    <!-- LIST -->
+    
+    <t t-name="Dashboard.widget.display.list">
+        <div class="pager"></div>
+       
+        <table class="oe_list_content">
+            <thead>
+                <t t-call="Dashboard.widget.display.list.head">
+                    <t t-set="columns" t-value="columns"/>
+                </t>
+            </thead>
+            <tfoot>
+            </tfoot>
+            <t t-if="groups.length > 0">
+                <t t-foreach="groups" t-as="group">
+                
+                <tbody>
+                    <tr class="oe_group_header">
+                        <th class="oe_list_group_name">
+                            <span style="float: left; white-space: pre;"></span>
+                            <span class="ui-icon ui-icon-triangle-1-e" style="float: left;"></span>
+                            <span class="group_label"><t t-esc="group" /></span>
+                        </th>
+                        <td t-att-colspan="(columns.length - 1)" />
+                    </tr>
+                </tbody>
+                <tbody class="group hidden" t-att-group-name="group"></tbody>
+                </t>
+            </t>
+            <t t-if="groups.length == 0">
+            <tbody></tbody>
+            </t>
+            
+        </table>
+    </t>
+    
+    <t t-name="Dashboard.widget.display.list.head">
+        <tr class="oe_list_header_columns">
+            <t t-foreach="columns" t-as="column">
+            
+            
+            <t t-set="reference" t-value="column.get('reference')" />
+            <t t-set="type_names" t-value="column.get('type_names')" />
+            <t t-set="sortable" t-value="(_(type_names).contains('order_by') ? ' sortable' : '')" />
+            <t t-set="order" t-value="(reference in reorder ? reorder[reference] : '')" />
+            
+            <th t-att-data-id="reference" t-att-class="sortable + ' ' + order"><div><t t-esc="column.get('name')"/></div></th>
+            </t>
+        </tr>
+    </t>
+    
+    <t t-name="Dashboard.widget.display.list.body">
+        <t t-foreach="data" t-as="item">
+            <td t-att-class="className" t-att-data-field="name"><t t-esc="value"/></td>
+        </t>
+    </t>
+    
+    <!-- GRAPH -->
+    
+    
+    <t t-name="Dashboard.widget.display.graph">
+    </t>
+    
+    <t t-name="Dashboard.widget.display.graph.no_result">
+        <span class="noresult">no result</span>
+    </t>
+    
+    <t t-name="Dashboard.widget.display.graph.one_result">
+        
+        <t t-foreach="series" t-as="serie">
+            <h4><t t-esc="serie.label" /></h4>
+            <t t-if="serie.data.length > 0">
+            <ul>
+                <t t-esc="console.log('tmpl', serie.data)" />
+                <t t-foreach="serie.data" t-as="item">
+                <t t-esc="console.log('tmpl item', item, format, ticks)" />
+                <li><span class="label"><t t-esc="ticks[item[0]]" /></span>:<span class="value"><t t-esc="format ? numeral(item[1]).format(format) : item[1]" /></span></li>
+                </t>
+            </ul>
+            </t>
+        </t>
+        
+    </t>
+    
+</template>
+

@@ -1,0 +1,8 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+
+access_dashboard_board_user,dashboard_board_user,model_dashboard_board,group_bi_dashboard_user,1,0,0,0
+access_dashboard_widget_user,dashboard_widget_user,model_dashboard_widget,group_bi_dashboard_user,1,0,0,0
+access_dashboard_board_to_widget_rel_user,dashboard_board_to_widget_rel_user,model_dashboard_board_to_widget_rel,group_bi_dashboard_user,1,0,0,0
+access_dashboard_metric_user,dashboard_metric_user,model_dashboard_metric,group_bi_dashboard_user,1,0,0,0
+access_dashboard_field_user,dashboard_field_user,model_dashboard_field,group_bi_dashboard_user,1,0,0,0
+access_dashboard_field_type_user,dashboard_field_type_user,model_dashboard_field_type,group_bi_dashboard_user,1,0,0,0

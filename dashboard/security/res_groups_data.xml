@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+<data>
+    <record id="group_bi_dashboard_user" model="res.groups">
+        <field name="name">Reporting / BI Dashboard User</field>
+    </record>
+</data>
+</openerp>

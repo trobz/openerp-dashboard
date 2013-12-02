@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+        
+        <record id="dashboard_metric_form" model="ir.ui.view">
+            <field name="name">dashboard.metric.form</field>
+            <field name="model">dashboard.metric</field>
+            <field name="arch" type="xml">
+                <form string="Metric">
+                    <notebook>
+                        <page string="General">
+                            <group colspan="2">
+                                <field name="name" />
+                                <field name="type" />
+                                <field name="widget_id" />
+                                <field name="model" />
+                                <field name="query_name" />
+                                <field name="position" />
+                                <field name="options" widget="serialized" />
+                                <field name="values" widget="serialized" />
+                            </group>
+                        </page>
+                        <page string="Fields">
+                            <field name="field_ids" widget="many2many" />
+                        </page>
+                                                
+                        <page string="Help">
+                            <group colspan="2">
+                                <field name="help" colspan="2" nolabel="1"/>
+                            </group>
+                        </page>
+                    </notebook>
+                </form>
+            </field>
+        </record>
+        
+        
+        <record id="dashboard_metric_tree" model="ir.ui.view">
+            <field name="name">dashboard.metric.tree</field>
+            <field name="model">dashboard.metric</field>
+            <field name="field_parent">fields</field>
+                      
+            <field name="arch" type="xml">
+                <tree string="Metrics">
+                    <field name="name"/>
+                    
+                    <field name="field_ids" />
+                    <field name="model" />
+                    <field name="query_name" />
+                    <field name="options" />
+                    <field name="values" />
+                </tree>            
+            </field>
+        </record>
+        
+    </data>
+</openerp>

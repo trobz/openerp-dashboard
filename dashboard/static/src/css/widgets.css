@@ -1,0 +1,24 @@
+#board #widgets {
+    overflow: hidden;
+    position: relative;
+}
+
+.sliding #widgets {
+    overflow: hidden;
+    height: 100%;
+}
+
+#board,
+#board >  div {
+    height: 100%;
+}
+
+#board .hidden {
+    display: none;    
+}
+
+
+
+#board #widgets h1 {
+    display: none;
+}

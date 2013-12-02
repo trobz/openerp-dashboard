@@ -1,0 +1,71 @@
+
+/*
+ * widget.search
+ */
+
+
+#board .search {
+    width: 100%;
+    overflow: auto;
+    background: #f3f3f3;
+}
+
+#board .search .search_part {
+    padding: 4px 5px;
+    min-height: 28px;
+    border-top: 1px solid #eee;
+    border-bottom: 1px solid #eee;
+}
+
+#board .search .search_part:last_child {
+    border-bottom: none;
+}
+
+#board .search .field {
+    float: left;
+}
+#board .search .button {
+    float: right;
+    margin: 0 5px;
+}
+
+#board .search_action {
+    cursor: pointer;
+}
+
+
+#board .search .condition {
+    float: left;
+}
+
+#board .search .type,
+#board .search .button,
+#board .search .field {
+    margin: 4px 4px 0 0;
+}
+#board .search .condition {
+    margin-top: 2px;
+}
+
+#board .search span.search_action {
+    background: #f5f5f5;
+    color:  #666;
+}
+
+#board .search span.search_action .search-type {
+    display: none;
+}
+
+#board .search span.search_action:hover {
+    background: #fdfdfd;
+    color:  rgb(48, 132, 199);
+}
+
+#board .search .edition span.search_action {
+    color:  rgb(48, 132, 199);
+}
+
+#board .search .criterion.global {
+    border-color: rgb(48, 132, 199);
+    color: rgb(48, 132, 199);
+}

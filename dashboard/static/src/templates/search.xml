@@ -1,0 +1,308 @@
+<template>
+    
+    <!-- search -->
+    
+    <t t-name="Dashboard.search">
+        <div class="domain search-subject" />
+        <div class="order search-subject" />
+        <div class="group search-subject" />
+    </t>
+    
+    <!-- search.global -->
+    
+    <t t-name="Dashboard.search.field_list">
+        <select class="field">
+        <t t-foreach="fields" t-as="field">
+            <option t-att-value="field.get('id')"><t t-esc="field.get('name')"/></option>
+        </t>
+        </select>
+    </t>
+    
+    <!-- search.domain -->
+    
+    <t t-name="Dashboard.search.domain.view">
+        <span class="domain_title search_action"  title="Filter">
+            <span class="search-type">Filter:</span>
+            <i class="icon-filter"></i>
+        </span>
+    
+        <div class="current">
+            <t t-if="has_domain">
+                <t t-call="Dashboard.search.domain.string">
+                    <t t-set="groups" t-value="groups" />
+                    <t t-set="operators" t-value="operators" />
+                    <t t-set="group_size" t-value="group_size" />
+                </t>
+            </t>
+            
+            <t t-if="!(has_domain)">
+                <span class="search_string">no filter selected</span>
+            </t>
+            
+            <t t-if="!(has_condition)">
+                <span class="search_string">show all</span>
+            </t>
+        </div>
+    </t>
+    
+    <t t-name="Dashboard.search.domain.string">
+        <t t-foreach="groups" t-as="criteria">
+            
+           
+            <t t-if="criteria_value.length gt 1 and group_size gt 1">
+                <span class="search_string">(</span>
+            </t>        
+           
+            <t t-foreach="criteria_value" t-as="criterion">
+        
+                <t t-set="operator" t-value="operators.byName(criterion.operator)" />
+                
+                <div t-att-class="'criterion' + (criterion.options.global ? ' global' : '')">
+                    <span class="search_field" t-att-field-id="criterion.field.get('id')"><t t-esc="criterion.field.get('name')" /></span>
+                    <span class="search_operator" t-att-operator="criterion.operator"><t t-esc="operator.text" /></span>
+                    <span class="search_value" t-att-value="criterion.value"><t t-esc="operator.string(criterion.value)" /></span>
+                    
+                    <t t-if="!criterion.options.global">
+                        <i class="icon-remove remove" />
+                    </t>
+                </div>
+            
+                <t t-if="criterion_index lt criteria_value.length - 1">
+                    <span class="search_string">or</span>
+                </t>
+            </t>
+            
+            <t t-if="criteria_value.length gt 1 and group_size gt 1">
+                <span class="search_string">)</span>
+            </t>   
+            
+            <t t-if="criteria_index lt (group_size - 1)">
+                <span class="search_string">and</span>
+            </t>   
+        </t>
+    </t>
+    
+    
+    <t t-name="Dashboard.search.domain.form">
+        
+        <span class="domain_title search_action" title="Filter">
+            <span class="search-type">Filter:</span>
+            <i class="icon-filter"></i>
+        </span>
+    
+        <t t-call="Dashboard.search.field_list">
+            <t t-set="fields" t-value="fields"/>
+        </t>
+    
+        <div class="condition">
+        </div>        
+        
+        <span class="button add"><i class="icon-plus"></i></span>
+    </t>
+    
+    
+    <t t-name="Dashboard.search.domain.operator">
+        <select class="operator">
+        <t t-foreach="conditions" t-as="condition">
+            <option t-att-value="condition" t-att-widget="operators.byName(condition).widget || default_widget"><t t-esc="operators.byName(condition).text" /></option>
+        </t>
+        </select>
+    </t>
+    
+    <t t-name="Dashboard.search.domain.widget">
+        <select class="value">
+        <t t-foreach="data" t-as="item">
+            <t t-esc="console.log('Dashboard.search.domain.widget', data, item)" />
+            <option t-att-value="item"><t t-esc="item_value" /></option>
+        </t>
+        </select>
+    </t>
+    
+    
+    <t t-name="Dashboard.search.domain.number">
+        
+       <t t-call="Dashboard.search.domain.operator">
+            <t t-set="conditions" t-value="['e','ne', 'gt', 'lt', 'gte', 'lte']" />
+            <t t-set="operators" t-value="operators" />
+       </t>
+        
+        <input type="text" class="value" />
+    
+    </t>
+    
+    <t t-name="Dashboard.search.domain.char">
+       
+        <t t-call="Dashboard.search.domain.operator">
+            <t t-set="conditions" t-value="['contains','n_contains', 'e','ne', 'is', 'ins']" />
+            <t t-set="operators" t-value="operators" />
+        </t>
+       
+        <input type="text" class="value" />
+    </t>
+    
+    <t t-name="Dashboard.search.domain.selection">
+       
+        <t t-call="Dashboard.search.domain.operator">
+            <t t-set="conditions" t-value="['e','ne']" />
+            <t t-set="operators" t-value="operators" />
+        </t>
+       
+        <select class="value">
+        <t t-foreach="description.selection" t-as="select">
+            <option t-att-value="select[0]"><t t-esc="select[1]"/></option>
+        </t>
+        </select>        
+    </t>
+    
+    <t t-name="Dashboard.search.domain.date">
+        <t t-call="Dashboard.search.domain.operator">
+            <t t-set="conditions" t-value="['e','ne', 'gt', 'lt', 'gte', 'lte', 'day', 'month', 'year', 'quarter']" />
+            <t t-set="default_widget" t-value="'date'" />
+            <t t-set="operators" t-value="operators" />
+       </t>
+       
+        <span class="value date" />
+    </t>
+    
+    <t t-name="Dashboard.search.domain.datetime">
+        <t t-call="Dashboard.search.domain.operator">
+            <t t-set="conditions" t-value="['e','ne', 'gt', 'lt', 'gte', 'lte']" />
+            <t t-set="default_widget" t-value="'datetime'" />
+            <t t-set="operators" t-value="operators" />
+       </t>
+       
+        <span class="value datetime" />
+    </t>
+    
+    <t t-name="Dashboard.search.domain.boolean">
+        <select class="operator">
+            <option value="true"><t t-esc="operators.byName('true').text" /></option>
+            <option value="false"><t t-esc="operators.byName('false').text" /></option>
+        </select>
+    </t>
+    
+    
+    <t t-name="Dashboard.search.domain.not_supported">
+        <span class="search_string">field type not supported</span>
+    </t>
+    
+    
+    <!-- search.group -->
+    
+    
+    <t t-name="Dashboard.widget.search.group">
+        <span class="search_action domain_title" title="Group">
+            <span class="search-type">Group:</span>
+            <i class="icon-reorder"></i>
+        </span>
+                
+        <div class="current">
+            <t t-if="has_group">
+                <t t-call="Dashboard.search.group.string">
+                    <t t-set="is_default" t-value="is_default" />
+                    <t t-set="groups" t-value="groups" />
+                </t>
+            </t>
+            
+            <t t-if="!(has_group)">
+                <span class="search_string">no group selected</span>
+            </t>
+        </div>
+    </t>
+    
+    <t t-name="Dashboard.search.group.string">
+        <t t-foreach="groups" t-as="group">
+            
+            <div class="criterion">
+                <span class="search_field" t-att-field-id="group.get('id')"><t t-esc="group.get('name')" /></span>
+                <t t-if="is_default">
+                    <span class="search_string">(default)</span>
+                </t>
+                <t t-if="!is_default">
+                    <i class="icon-remove remove" />
+                </t>
+            
+            </div>
+               
+            <t t-if="group_index lt groups.length - 1">
+                <span class="search_string">, </span>
+            </t>
+        </t>
+    </t>
+    
+
+    <t t-name="Dashboard.search.group.form">
+        <span class="search_action domain_title" title="Group">
+            <span class="search-type">Group:</span>
+            <i class="icon-reorder"></i>
+        </span>
+        
+        <t t-call="Dashboard.search.field_list">
+            <t t-set="fields" t-value="fields"/>
+        </t>
+    
+        <span class="button add"><i class="icon-plus"></i></span>
+    </t>
+    
+    <!-- search.order -->
+    
+    <t t-name="Dashboard.widget.search.order">
+        <span class="search_action domain_title" title="Order">
+            <span class="search-type">Order:</span>
+            <i class="icon-sort"></i>
+        </span>
+        
+        <div class="current">
+            <t t-if="has_order">
+                <t t-call="Dashboard.search.order.string">
+                    <t t-set="is_default" t-value="is_default" />
+                    <t t-set="orders" t-value="orders" />
+                </t>
+            </t>
+            
+            <t t-if="!(has_order)">
+                <span class="search_string">no order selected</span>
+            </t>
+        </div>
+    </t>
+
+    <t t-name="Dashboard.search.order.string">
+        <t t-foreach="orders" t-as="order">
+            
+            <div class="criterion">
+                <span class="search_field" t-att-field-id="order.field.get('id')"><t t-esc="order.field.get('name')" /></span>
+                <span class="search_value" t-att-value="order.type"><t t-esc="order.type" /></span>
+                <t t-if="is_default">
+                    <span class="search_string">(default)</span>
+                </t>
+                <t t-if="!is_default">
+                    <i class="icon-remove remove" />
+                </t>
+            </div>
+               
+            <t t-if="order_index lt orders.length - 1">
+                <span class="search_string">, </span>
+            </t>
+        </t>
+    </t>
+
+    <t t-name="Dashboard.search.order.form">
+        <span class="search_action domain_title" title="Order">
+            <span class="search-type">Order:</span>
+            <i class="icon-sort"></i>
+        </span>
+        
+        <t t-call="Dashboard.search.field_list">
+            <t t-set="fields" t-value="fields"/>
+        </t>
+        
+        <select class="type">
+            <option value="ASC">ascending</option>
+            <option value="DESC">descending</option>
+        </select>   
+    
+        <span class="button add"><i class="icon-plus"></i></span>
+    </t>
+    
+</template>
+

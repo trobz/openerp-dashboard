@@ -1,0 +1,80 @@
+<template>
+
+
+    <t t-name="Dashboard.widgets">
+        <h1><t t-esc="name" /></h1>
+        <div class="widgets"></div>
+    </t>
+    
+    <t t-name="Dashboard.widget">
+        <div class="widget_content">
+            <div class="head">
+                <i class="loader invisible icon-refresh icon-spin" />
+                
+                <t t-if="has_help">
+                    <i class="icon-question-sign"></i>
+                </t>
+                    
+                <h2><t t-esc="name"/></h2>
+                
+                <span class="pager">
+                </span>
+                
+                <span class="button toggle_search">
+                    <i class="icon-search"></i>
+                </span>
+                
+                <span class="button remove_widget">
+                    <i class="icon-remove"></i>
+                </span>
+            </div>
+        
+            <div class="body loading">
+                <div class="search hidden" />
+                <div class="display" />
+            </div>
+            
+            <div class="foot status" />
+        </div>
+        
+        
+        <t t-if="has_help">
+        <div class="widget_help hidden">
+            <h3 class="help_title">Notes:</h3>
+            <ul>
+        	<t t-foreach="metrics" t-as="metric">
+        	   <t t-if="metric.get('help')">
+                <li><b><t t-esc="metric.get('name')" />: </b><t t-esc="metric.get('help')" /></li>
+        	   </t>
+        	</t>
+        	</ul>
+        </div>
+        </t>
+    </t>
+    
+    
+    <t t-name="Dashboard.widget.display">
+        <span>display</span>
+    </t>
+    
+    <t t-name="Dashboard.widget.status">
+        <span class="metrics">
+        <t t-foreach="metrics" t-as="metric">
+            <t t-if="metric.get('model_details').id">
+            <a t-att-metric-id="metric.get('id')" class="metric">
+                <t t-esc="metric.get('name')" />
+            </a>
+            </t>
+            <t t-if="!metric.get('model_details').id">
+                <t t-esc="metric.get('name')" />
+            </t>
+            
+        </t>
+        </span>
+        <span class="updated_at">
+            <t t-esc="updated_at" />
+        </span>
+    </t>
+
+</template>
+

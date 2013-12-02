@@ -1,0 +1,73 @@
+<template>
+
+<t t-name="Dashboard.tester">
+    <div id="dashboard_tester" class="bootstrap_scope" />
+</t>
+
+<t t-name="Dashboard.tester.widgets">
+    <div class="panel panel-primary">
+        <div class="panel-heading">
+            <h3 class="panel-title">Widgets</h3>
+        </div>
+        
+        <ul id="dashboard_tester" class="list-group"></ul>
+    
+        <button type="button" class="test_all btn btn-primary">Test All</button>
+    </div>
+</t>
+
+<t t-name="Dashboard.tester.widget">
+    <button type="button" class="test btn btn-small btn-primary">Test</button>
+    <span class="badge"><t t-esc="model.metrics.length" /> metric<t t-esc="(model.metrics.length > 1 ? 's' : '')" /></span>
+
+    <div class="widget-title">
+        <span class="detail">
+            <i class="icon-expand-alt"></i>
+            <h4><t t-esc="model.get('name')" /></h4>
+        </span>
+        
+        <span class="label label-success">Success</span>
+        <span class="label label-warning">Warning</span>
+        <span class="label label-danger">Failed</span>
+    </div>
+    
+    <div class="well well-small test_result"></div>
+    
+</t>
+
+<t t-name="Dashboard.tester.result">
+    <i t-att-class="icon + ' text-' + state"></i>
+    <span t-att-class="'text-' + state + ' test-label' + (model.hasMessage() ? ' clickable' : '')"><t t-esc="model.get('label')" /></span>
+    
+    <t t-if="model.hasMessage()">
+        <i class="chevron icon-chevron-right"></i>
+        <div t-att-class="state + ' test-info'">
+        <t t-if="model.arrayMessage()">
+            <ul>
+            <t t-foreach="model.get('message')" t-as="line">
+                <li>
+                    <span class="message"><t t-esc="line.message" /></span>
+                    
+                    <t t-if="line.code">
+                        <br /><pre><code><t t-esc="line.code" /></code></pre>
+                    </t>
+                    
+                    <t t-if="line.trace">
+                        <span class="trace">trace</span><i class="debug_chevron icon-chevron-right"></i>
+                        <br />
+                        <pre class="debug_trace"><code><t t-esc="line.trace" /></code></pre>
+                    </t>
+                </li>
+            </t>
+            </ul>
+        </t>
+        <t t-if="!model.arrayMessage()">
+            <t t-esc="model.get('message')" />
+        </t>
+        
+        </div>
+    </t>
+</t>
+
+</template>
+
