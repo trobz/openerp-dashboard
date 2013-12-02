@@ -1,4 +1,4 @@
-openerp.unleashed.module('trobz_dashboard',function(dashboard, _, Backbone, base){
+openerp.unleashed.module('dashboard',function(dashboard, _, Backbone, base){
     
     var Layout = Marionette.Layout,
         _superLayout = Layout.prototype;
@@ -10,7 +10,7 @@ openerp.unleashed.module('trobz_dashboard',function(dashboard, _, Backbone, base
     var CODES = TestBase.prototype.codes;
         
     var TestWidget = Layout.extend({
-        template: 'TrobzDashboard.tester.widget',
+        template: 'Dashboard.tester.widget',
         tagName: 'li',
         className: 'list-group-item',
 
@@ -98,7 +98,7 @@ openerp.unleashed.module('trobz_dashboard',function(dashboard, _, Backbone, base
     var TestWidgets = CompositeView.extend({
         
         className: 'tester',
-        template: 'TrobzDashboard.tester.widgets',
+        template: 'Dashboard.tester.widgets',
         
         itemView: TestWidget,
         itemViewContainer: '#dashboard_tester',

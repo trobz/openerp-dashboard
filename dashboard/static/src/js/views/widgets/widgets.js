@@ -1,4 +1,4 @@
-openerp.unleashed.module('trobz_dashboard',function(dashboard, _, Backbone, base){
+openerp.unleashed.module('dashboard',function(dashboard, _, Backbone, base){
  
     var Widget = dashboard.views('Widget'),
         View = Marionette.CompositeView,
@@ -9,7 +9,7 @@ openerp.unleashed.module('trobz_dashboard',function(dashboard, _, Backbone, base
         type: 'list',
         className: 'list',
         
-        template: 'TrobzDashboard.widgets',
+        template: 'Dashboard.widgets',
         
         itemViewContainer: '.widgets',
         

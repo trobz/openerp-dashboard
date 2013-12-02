@@ -1,10 +1,10 @@
-openerp.unleashed.module('trobz_dashboard',function(dashboard, _, Backbone, base){
+openerp.unleashed.module('dashboard',function(dashboard, _, Backbone, base){
  
     var Layout = Marionette.Layout,
         _super = Layout.prototype;
 
     var PanelLayout = Layout.extend({
-        template: 'TrobzDashboard.panel',
+        template: 'Dashboard.panel',
         
         regions: {
             toolbar: '#toolbar',

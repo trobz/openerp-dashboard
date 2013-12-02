@@ -4,68 +4,68 @@
  */
 
 
-#trobz_board .search {
+#board .search {
     width: 100%;
     overflow: auto;
     background: #f3f3f3;
 }
 
-#trobz_board .search .search_part {
+#board .search .search_part {
     padding: 4px 5px;
     min-height: 28px;
     border-top: 1px solid #eee;
     border-bottom: 1px solid #eee;
 }
 
-#trobz_board .search .search_part:last_child {
+#board .search .search_part:last_child {
     border-bottom: none;
 }
 
-#trobz_board .search .field {
+#board .search .field {
     float: left;
 }
-#trobz_board .search .button {
+#board .search .button {
     float: right;
     margin: 0 5px;
 }
 
-#trobz_board .search_action {
+#board .search_action {
     cursor: pointer;
 }
 
 
-#trobz_board .search .condition {
+#board .search .condition {
     float: left;
 }
 
-#trobz_board .search .type,
-#trobz_board .search .button,
-#trobz_board .search .field {
+#board .search .type,
+#board .search .button,
+#board .search .field {
     margin: 4px 4px 0 0;
 }
-#trobz_board .search .condition {
+#board .search .condition {
     margin-top: 2px;
 }
 
-#trobz_board .search span.search_action {
+#board .search span.search_action {
     background: #f5f5f5;
     color:  #666;
 }
 
-#trobz_board .search span.search_action .search-type {
+#board .search span.search_action .search-type {
     display: none;
 }
 
-#trobz_board .search span.search_action:hover {
+#board .search span.search_action:hover {
     background: #fdfdfd;
     color:  rgb(48, 132, 199);
 }
 
-#trobz_board .search .edition span.search_action {
+#board .search .edition span.search_action {
     color:  rgb(48, 132, 199);
 }
 
-#trobz_board .search .criterion.global {
+#board .search .criterion.global {
     border-color: rgb(48, 132, 199);
     color: rgb(48, 132, 199);
 }

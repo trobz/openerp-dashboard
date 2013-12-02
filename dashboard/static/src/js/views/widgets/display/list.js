@@ -1,9 +1,9 @@
-openerp.unleashed.module('trobz_dashboard',function(dashboard, _, Backbone, base){
+openerp.unleashed.module('dashboard',function(dashboard, _, Backbone, base){
 
 
     var RowView = Backbone.Marionette.ItemView.extend({
         tagName : "tr",
-        template : "TrobzDashboard.widget.display.list.body",
+        template : "Dashboard.widget.display.list.body",
         initialize: function(options){
             this.options = $.extend({
                 format: '0,0',
@@ -52,7 +52,7 @@ openerp.unleashed.module('trobz_dashboard',function(dashboard, _, Backbone, base
             'click .oe_group_header': 'toggleGroup'
         },
 
-        template : "TrobzDashboard.widget.display.list",
+        template : "Dashboard.widget.display.list",
 
         initialize: function(options){
             this.search = options.search;

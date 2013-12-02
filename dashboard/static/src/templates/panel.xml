@@ -1,12 +1,12 @@
 <template>
 
-<t t-name="TrobzDashboard.panel">
+<t t-name="Dashboard.panel">
     <div id="toolbar"></div>
     <div id="widgets"></div>
 </t>
 
 
-<t t-name="TrobzDashboard.toolbar.print">
+<t t-name="Dashboard.toolbar.print">
     <div class="section board_action left">
         <span class="button back_action"><i class="icon-signout icon-rotate-180"></i></span>
     </div>
@@ -17,7 +17,7 @@
     
 </t>
 
-<t t-name="TrobzDashboard.toolbar">
+<t t-name="Dashboard.toolbar">
 
     <!-- timebar view -->
     
@@ -37,7 +37,7 @@
     
     <div class="section board_action right">
         <span class="mode">
-            <t t-call="TrobzDashboard.toolbar.list" />
+            <t t-call="Dashboard.toolbar.list" />
         </span>
     </div>    
 
@@ -52,7 +52,7 @@
 
 
 
-<t t-name="TrobzDashboard.timebar">
+<t t-name="Dashboard.timebar">
     <div class="section period_name">
         <select>
             <option value="custom">Custom</option>
@@ -81,7 +81,7 @@
 
 </t>
 
-<t t-name="TrobzDashboard.toolbar.sliding">
+<t t-name="Dashboard.toolbar.sliding">
     
      <ul class="pager oe_pager_group">
         <li>
@@ -108,7 +108,7 @@
     <span class="button list_action"><i class="icon-stop"></i></span>
 </t>
 
-<t t-name="TrobzDashboard.toolbar.list">
+<t t-name="Dashboard.toolbar.list">
     <span class="button sliding_action"><i class="icon-play"></i></span>
 </t>
 
@@ -116,7 +116,7 @@
 
 
 
-<t t-name="TrobzDashboard.searchbar">
+<t t-name="Dashboard.searchbar">
     <span>search things here</span>    
 </t>
 

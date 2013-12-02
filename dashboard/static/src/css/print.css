@@ -97,7 +97,7 @@
 
 #print-dashboard.print #widgets i,
 #print-dashboard.print .foot,
-#print-dashboard.print .trobz-pager,
+#print-dashboard.print .unleashed-pager,
 #print-dashboard.print .widget .head .button {
     display: none !important;
 }

@@ -1,4 +1,4 @@
-openerp.unleashed.module('trobz_dashboard',function(dashboard, _, Backbone, base){
+openerp.unleashed.module('dashboard',function(dashboard, _, Backbone, base){
 
     var Renderer = Marionette.Renderer;
 
@@ -117,7 +117,7 @@ openerp.unleashed.module('trobz_dashboard',function(dashboard, _, Backbone, base
                     //no result
                     if(_(this.data).every(function(serie){return serie.data.length <= 0; })){
                         this.$el.html(
-                            Renderer.render('TrobzDashboard.widget.display.graph.no_result')
+                            Renderer.render('Dashboard.widget.display.graph.no_result')
                         );
                     }
                     //not more than 1 result
@@ -126,7 +126,7 @@ openerp.unleashed.module('trobz_dashboard',function(dashboard, _, Backbone, base
                         _(this.options.xaxis.ticks).each(function(item){ticks[item[0]] = item[1];});
                         
                         this.$el.html(
-                            Renderer.render('TrobzDashboard.widget.display.graph.one_result', {
+                            Renderer.render('Dashboard.widget.display.graph.one_result', {
                                 series: this.data,
                                 ticks: ticks,
                                 format: this.options.yaxis.format || false,

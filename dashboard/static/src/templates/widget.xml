@@ -1,12 +1,12 @@
 <template>
 
 
-    <t t-name="TrobzDashboard.widgets">
+    <t t-name="Dashboard.widgets">
         <h1><t t-esc="name" /></h1>
         <div class="widgets"></div>
     </t>
     
-    <t t-name="TrobzDashboard.widget">
+    <t t-name="Dashboard.widget">
         <div class="widget_content">
             <div class="head">
                 <i class="loader invisible icon-refresh icon-spin" />
@@ -53,11 +53,11 @@
     </t>
     
     
-    <t t-name="TrobzDashboard.widget.display">
+    <t t-name="Dashboard.widget.display">
         <span>display</span>
     </t>
     
-    <t t-name="TrobzDashboard.widget.status">
+    <t t-name="Dashboard.widget.status">
         <span class="metrics">
         <t t-foreach="metrics" t-as="metric">
             <t t-if="metric.get('model_details').id">

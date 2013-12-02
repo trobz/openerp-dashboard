@@ -1,4 +1,4 @@
-openerp.unleashed.module('trobz_dashboard',function(dashboard, _, Backbone, base){
+openerp.unleashed.module('dashboard',function(dashboard, _, Backbone, base){
 
 
     var Renderer = Marionette.Renderer,
@@ -7,7 +7,7 @@ openerp.unleashed.module('trobz_dashboard',function(dashboard, _, Backbone, base
 
     var WidgetStatus = View.extend({
         
-        template: 'TrobzDashboard.widget.status',
+        template: 'Dashboard.widget.status',
         
         events: {
             'click .metric': 'openMetric'

@@ -1,4 +1,4 @@
-openerp.unleashed.module('trobz_dashboard', function(dashboard, _, Backbone, base){
+openerp.unleashed.module('dashboard', function(dashboard, _, Backbone, base){
       
     //number of days used for the rolling period  
     var rolling = {

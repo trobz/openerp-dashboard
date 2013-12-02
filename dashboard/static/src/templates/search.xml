@@ -2,7 +2,7 @@
     
     <!-- search -->
     
-    <t t-name="TrobzDashboard.search">
+    <t t-name="Dashboard.search">
         <div class="domain search-subject" />
         <div class="order search-subject" />
         <div class="group search-subject" />
@@ -10,7 +10,7 @@
     
     <!-- search.global -->
     
-    <t t-name="TrobzDashboard.search.field_list">
+    <t t-name="Dashboard.search.field_list">
         <select class="field">
         <t t-foreach="fields" t-as="field">
             <option t-att-value="field.get('id')"><t t-esc="field.get('name')"/></option>
@@ -20,7 +20,7 @@
     
     <!-- search.domain -->
     
-    <t t-name="TrobzDashboard.search.domain.view">
+    <t t-name="Dashboard.search.domain.view">
         <span class="domain_title search_action"  title="Filter">
             <span class="search-type">Filter:</span>
             <i class="icon-filter"></i>
@@ -28,7 +28,7 @@
     
         <div class="current">
             <t t-if="has_domain">
-                <t t-call="TrobzDashboard.search.domain.string">
+                <t t-call="Dashboard.search.domain.string">
                     <t t-set="groups" t-value="groups" />
                     <t t-set="operators" t-value="operators" />
                     <t t-set="group_size" t-value="group_size" />
@@ -45,7 +45,7 @@
         </div>
     </t>
     
-    <t t-name="TrobzDashboard.search.domain.string">
+    <t t-name="Dashboard.search.domain.string">
         <t t-foreach="groups" t-as="criteria">
             
            
@@ -83,14 +83,14 @@
     </t>
     
     
-    <t t-name="TrobzDashboard.search.domain.form">
+    <t t-name="Dashboard.search.domain.form">
         
         <span class="domain_title search_action" title="Filter">
             <span class="search-type">Filter:</span>
             <i class="icon-filter"></i>
         </span>
     
-        <t t-call="TrobzDashboard.search.field_list">
+        <t t-call="Dashboard.search.field_list">
             <t t-set="fields" t-value="fields"/>
         </t>
     
@@ -101,7 +101,7 @@
     </t>
     
     
-    <t t-name="TrobzDashboard.search.domain.operator">
+    <t t-name="Dashboard.search.domain.operator">
         <select class="operator">
         <t t-foreach="conditions" t-as="condition">
             <option t-att-value="condition" t-att-widget="operators.byName(condition).widget || default_widget"><t t-esc="operators.byName(condition).text" /></option>
@@ -109,19 +109,19 @@
         </select>
     </t>
     
-    <t t-name="TrobzDashboard.search.domain.widget">
+    <t t-name="Dashboard.search.domain.widget">
         <select class="value">
         <t t-foreach="data" t-as="item">
-            <t t-esc="console.log('TrobzDashboard.search.domain.widget', data, item)" />
+            <t t-esc="console.log('Dashboard.search.domain.widget', data, item)" />
             <option t-att-value="item"><t t-esc="item_value" /></option>
         </t>
         </select>
     </t>
     
     
-    <t t-name="TrobzDashboard.search.domain.number">
+    <t t-name="Dashboard.search.domain.number">
         
-       <t t-call="TrobzDashboard.search.domain.operator">
+       <t t-call="Dashboard.search.domain.operator">
             <t t-set="conditions" t-value="['e','ne', 'gt', 'lt', 'gte', 'lte']" />
             <t t-set="operators" t-value="operators" />
        </t>
@@ -130,9 +130,9 @@
     
     </t>
     
-    <t t-name="TrobzDashboard.search.domain.char">
+    <t t-name="Dashboard.search.domain.char">
        
-        <t t-call="TrobzDashboard.search.domain.operator">
+        <t t-call="Dashboard.search.domain.operator">
             <t t-set="conditions" t-value="['contains','n_contains', 'e','ne', 'is', 'ins']" />
             <t t-set="operators" t-value="operators" />
         </t>
@@ -140,9 +140,9 @@
         <input type="text" class="value" />
     </t>
     
-    <t t-name="TrobzDashboard.search.domain.selection">
+    <t t-name="Dashboard.search.domain.selection">
        
-        <t t-call="TrobzDashboard.search.domain.operator">
+        <t t-call="Dashboard.search.domain.operator">
             <t t-set="conditions" t-value="['e','ne']" />
             <t t-set="operators" t-value="operators" />
         </t>
@@ -154,8 +154,8 @@
         </select>        
     </t>
     
-    <t t-name="TrobzDashboard.search.domain.date">
-        <t t-call="TrobzDashboard.search.domain.operator">
+    <t t-name="Dashboard.search.domain.date">
+        <t t-call="Dashboard.search.domain.operator">
             <t t-set="conditions" t-value="['e','ne', 'gt', 'lt', 'gte', 'lte', 'day', 'month', 'year', 'quarter']" />
             <t t-set="default_widget" t-value="'date'" />
             <t t-set="operators" t-value="operators" />
@@ -164,8 +164,8 @@
         <span class="value date" />
     </t>
     
-    <t t-name="TrobzDashboard.search.domain.datetime">
-        <t t-call="TrobzDashboard.search.domain.operator">
+    <t t-name="Dashboard.search.domain.datetime">
+        <t t-call="Dashboard.search.domain.operator">
             <t t-set="conditions" t-value="['e','ne', 'gt', 'lt', 'gte', 'lte']" />
             <t t-set="default_widget" t-value="'datetime'" />
             <t t-set="operators" t-value="operators" />
@@ -174,7 +174,7 @@
         <span class="value datetime" />
     </t>
     
-    <t t-name="TrobzDashboard.search.domain.boolean">
+    <t t-name="Dashboard.search.domain.boolean">
         <select class="operator">
             <option value="true"><t t-esc="operators.byName('true').text" /></option>
             <option value="false"><t t-esc="operators.byName('false').text" /></option>
@@ -182,7 +182,7 @@
     </t>
     
     
-    <t t-name="TrobzDashboard.search.domain.not_supported">
+    <t t-name="Dashboard.search.domain.not_supported">
         <span class="search_string">field type not supported</span>
     </t>
     
@@ -190,7 +190,7 @@
     <!-- search.group -->
     
     
-    <t t-name="TrobzDashboard.widget.search.group">
+    <t t-name="Dashboard.widget.search.group">
         <span class="search_action domain_title" title="Group">
             <span class="search-type">Group:</span>
             <i class="icon-reorder"></i>
@@ -198,7 +198,7 @@
                 
         <div class="current">
             <t t-if="has_group">
-                <t t-call="TrobzDashboard.search.group.string">
+                <t t-call="Dashboard.search.group.string">
                     <t t-set="is_default" t-value="is_default" />
                     <t t-set="groups" t-value="groups" />
                 </t>
@@ -210,7 +210,7 @@
         </div>
     </t>
     
-    <t t-name="TrobzDashboard.search.group.string">
+    <t t-name="Dashboard.search.group.string">
         <t t-foreach="groups" t-as="group">
             
             <div class="criterion">
@@ -231,13 +231,13 @@
     </t>
     
 
-    <t t-name="TrobzDashboard.search.group.form">
+    <t t-name="Dashboard.search.group.form">
         <span class="search_action domain_title" title="Group">
             <span class="search-type">Group:</span>
             <i class="icon-reorder"></i>
         </span>
         
-        <t t-call="TrobzDashboard.search.field_list">
+        <t t-call="Dashboard.search.field_list">
             <t t-set="fields" t-value="fields"/>
         </t>
     
@@ -246,7 +246,7 @@
     
     <!-- search.order -->
     
-    <t t-name="TrobzDashboard.widget.search.order">
+    <t t-name="Dashboard.widget.search.order">
         <span class="search_action domain_title" title="Order">
             <span class="search-type">Order:</span>
             <i class="icon-sort"></i>
@@ -254,7 +254,7 @@
         
         <div class="current">
             <t t-if="has_order">
-                <t t-call="TrobzDashboard.search.order.string">
+                <t t-call="Dashboard.search.order.string">
                     <t t-set="is_default" t-value="is_default" />
                     <t t-set="orders" t-value="orders" />
                 </t>
@@ -266,7 +266,7 @@
         </div>
     </t>
 
-    <t t-name="TrobzDashboard.search.order.string">
+    <t t-name="Dashboard.search.order.string">
         <t t-foreach="orders" t-as="order">
             
             <div class="criterion">
@@ -286,13 +286,13 @@
         </t>
     </t>
 
-    <t t-name="TrobzDashboard.search.order.form">
+    <t t-name="Dashboard.search.order.form">
         <span class="search_action domain_title" title="Order">
             <span class="search-type">Order:</span>
             <i class="icon-sort"></i>
         </span>
         
-        <t t-call="TrobzDashboard.search.field_list">
+        <t t-call="Dashboard.search.field_list">
             <t t-set="fields" t-value="fields"/>
         </t>
         

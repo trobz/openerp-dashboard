@@ -2,23 +2,23 @@
     
     <!-- NUMBER -->
     
-    <t t-name="TrobzDashboard.widget.display.numeric">
+    <t t-name="Dashboard.widget.display.numeric">
         <dl></dl>
     </t>
     
-    <t t-name="TrobzDashboard.widget.display.numeric.item">
+    <t t-name="Dashboard.widget.display.numeric.item">
         <dt t-att-class="className"><t t-esc="label" /></dt>
         <dd t-att-class="className"><t t-esc="value" /></dd>
     </t>
     
     <!-- LIST -->
     
-    <t t-name="TrobzDashboard.widget.display.list">
+    <t t-name="Dashboard.widget.display.list">
         <div class="pager"></div>
        
         <table class="oe_list_content">
             <thead>
-                <t t-call="TrobzDashboard.widget.display.list.head">
+                <t t-call="Dashboard.widget.display.list.head">
                     <t t-set="columns" t-value="columns"/>
                 </t>
             </thead>
@@ -47,7 +47,7 @@
         </table>
     </t>
     
-    <t t-name="TrobzDashboard.widget.display.list.head">
+    <t t-name="Dashboard.widget.display.list.head">
         <tr class="oe_list_header_columns">
             <t t-foreach="columns" t-as="column">
             
@@ -62,7 +62,7 @@
         </tr>
     </t>
     
-    <t t-name="TrobzDashboard.widget.display.list.body">
+    <t t-name="Dashboard.widget.display.list.body">
         <t t-foreach="data" t-as="item">
             <td t-att-class="className" t-att-data-field="name"><t t-esc="value"/></td>
         </t>
@@ -71,14 +71,14 @@
     <!-- GRAPH -->
     
     
-    <t t-name="TrobzDashboard.widget.display.graph">
+    <t t-name="Dashboard.widget.display.graph">
     </t>
     
-    <t t-name="TrobzDashboard.widget.display.graph.no_result">
+    <t t-name="Dashboard.widget.display.graph.no_result">
         <span class="noresult">no result</span>
     </t>
     
-    <t t-name="TrobzDashboard.widget.display.graph.one_result">
+    <t t-name="Dashboard.widget.display.graph.one_result">
         
         <t t-foreach="series" t-as="serie">
             <h4><t t-esc="serie.label" /></h4>

@@ -1,4 +1,4 @@
-openerp.unleashed.module('trobz_dashboard',function(dashboard, _, Backbone, base){
+openerp.unleashed.module('dashboard',function(dashboard, _, Backbone, base){
     
     var ItemView = Marionette.ItemView,
         _superItem = ItemView.prototype;
@@ -16,7 +16,7 @@ openerp.unleashed.module('trobz_dashboard',function(dashboard, _, Backbone, base
      */
     
      var TestResult = ItemView.extend({
-        template: 'TrobzDashboard.tester.result',
+        template: 'Dashboard.tester.result',
         tagName: 'li',
         className: 'list-group-item',
         

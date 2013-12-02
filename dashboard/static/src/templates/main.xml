@@ -1,14 +1,14 @@
 <template>
 
-<t t-name="TrobzDashboard">
-    <div id="trobz_board"></div>
+<t t-name="Dashboard">
+    <div id="board"></div>
 </t>
 
-<t t-name="TrobzDashboard.print">
+<t t-name="Dashboard.print">
     <div id="print-dashboard" class="print"></div>
 </t>
 
-<t t-name="TrobzDashboard.metric_info">
+<t t-name="Dashboard.metric_info">
     <t t-if="has_period">
         <div class="period_info metric_info">
             <span class="domain_title">
@@ -43,7 +43,7 @@
                 <i class="icon-filter"></i>
             </span>
             <div class="current">
-                <t t-call="TrobzDashboard.search.domain.string">
+                <t t-call="Dashboard.search.domain.string">
                     <t t-set="groups" t-value="groups" />
                     <t t-set="operators" t-value="operators" />
                     <t t-set="group_size" t-value="group_size" />

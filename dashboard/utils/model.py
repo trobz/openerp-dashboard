@@ -14,7 +14,7 @@ try:
     import sqlparse  
     sqlparse_available = True
 except ImportError:
-    logging.warn("trobz_dashboard: 'sqlparse' module not available, install it (pip install sqlparse) to have a formatted SQL query in debug mode.")
+    logging.warn("dashboard: 'sqlparse' module not available, install it (pip install sqlparse) to have a formatted SQL query in debug mode.")
     sqlparse_available = False
  
 class metrics():
@@ -126,7 +126,7 @@ class metrics():
     
     def execute(self, cr, uid, ids, period={}, domain=[], group_by=[], order_by=[], limit="ALL", offset=0, debug=False, security_test=False, context=None):
         """
-        Execute custom SQL queries to populate a trobz dashboard widget
+        Execute custom SQL queries to populate a dashboard widget
         """
         
         

@@ -1,4 +1,4 @@
-openerp.unleashed.module('trobz_dashboard',function(dashboard, _, Backbone, base){
+openerp.unleashed.module('dashboard',function(dashboard, _, Backbone, base){
 
     var Renderer = Marionette.Renderer;
     
@@ -8,7 +8,7 @@ openerp.unleashed.module('trobz_dashboard',function(dashboard, _, Backbone, base
     var Numeric = ItemView.extend({
     
         className: 'numeric', 
-        template: 'TrobzDashboard.widget.display.numeric.item',
+        template: 'Dashboard.widget.display.numeric.item',
 
         initialize: function(options){
             this.options = $.extend({
@@ -58,7 +58,7 @@ openerp.unleashed.module('trobz_dashboard',function(dashboard, _, Backbone, base
 
         itemView : Numeric,
         itemViewContainer : "dl",
-        template : "TrobzDashboard.widget.display.numeric",
+        template : "Dashboard.widget.display.numeric",
 
         initialize: function(options){
             this.collection = this.model.results;

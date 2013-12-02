@@ -1,4 +1,4 @@
-openerp.unleashed.module('trobz_dashboard',function(dashboard, _, Backbone, base){
+openerp.unleashed.module('dashboard',function(dashboard, _, Backbone, base){
 
     var Domain = dashboard.views('SearchDomain'),
         Order = dashboard.views('SearchOrder'),
@@ -11,7 +11,7 @@ openerp.unleashed.module('trobz_dashboard',function(dashboard, _, Backbone, base
     
         className: 'search', 
     
-        template: 'TrobzDashboard.search',
+        template: 'Dashboard.search',
     
         regions: {
             domain: '.domain',

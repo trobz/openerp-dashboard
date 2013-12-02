@@ -1,4 +1,4 @@
-openerp.unleashed.module('trobz_dashboard', function(dashboard, _, Backbone){
+openerp.unleashed.module('dashboard', function(dashboard, _, Backbone){
         
     openerp.testing.section('Search Model', function (test) {
 

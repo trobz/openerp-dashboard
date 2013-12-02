@@ -1,4 +1,4 @@
-openerp.unleashed.module('trobz_dashboard',function(dashboard, _, Backbone, base){
+openerp.unleashed.module('dashboard',function(dashboard, _, Backbone, base){
 
 
     var Renderer = Marionette.Renderer,
@@ -9,17 +9,17 @@ openerp.unleashed.module('trobz_dashboard',function(dashboard, _, Backbone, base
     
         className: 'metric_info',
     
-        template: 'TrobzDashboard.search.domain.view',
+        template: 'Dashboard.search.domain.view',
     
         templates: {
-            'form': 'TrobzDashboard.search.domain.form',
-            'char': 'TrobzDashboard.search.domain.char',
-            'selection': 'TrobzDashboard.search.domain.selection',
-            'number': 'TrobzDashboard.search.domain.number',
-            'date': 'TrobzDashboard.search.domain.date',
-            'datetime': 'TrobzDashboard.search.domain.datetime',
-            'boolean': 'TrobzDashboard.search.domain.boolean',
-            'not_supported': 'TrobzDashboard.search.domain.not_supported'
+            'form': 'Dashboard.search.domain.form',
+            'char': 'Dashboard.search.domain.char',
+            'selection': 'Dashboard.search.domain.selection',
+            'number': 'Dashboard.search.domain.number',
+            'date': 'Dashboard.search.domain.date',
+            'datetime': 'Dashboard.search.domain.datetime',
+            'boolean': 'Dashboard.search.domain.boolean',
+            'not_supported': 'Dashboard.search.domain.not_supported'
         },
         
         ui: {

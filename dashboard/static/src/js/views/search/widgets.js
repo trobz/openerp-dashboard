@@ -1,4 +1,4 @@
-openerp.unleashed.module('trobz_dashboard').ready(function(instance, dashboard, _, Backbone, base){
+openerp.unleashed.module('dashboard').ready(function(instance, dashboard, _, Backbone, base){
 
     var dateWidgets = {
          on_picker_select: function(text, instance_) {
@@ -18,7 +18,7 @@ openerp.unleashed.module('trobz_dashboard').ready(function(instance, dashboard, 
     var _superView = Backbone.Marionette.ItemView.prototype;
     var Widget = Backbone.Marionette.ItemView.extend({
         tagName: 'span', 
-        template: 'TrobzDashboard.search.domain.widget',
+        template: 'Dashboard.search.domain.widget',
         render: function(){
             _superView.render.apply(this, arguments);
             return this.$el;

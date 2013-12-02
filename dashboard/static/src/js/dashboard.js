@@ -1,5 +1,4 @@
-var debug = null;
-openerp.unleashed.module('trobz_dashboard').ready(function(instance, dashboard, _, Backbone, base){
+openerp.unleashed.module('dashboard').ready(function(instance, dashboard, _, Backbone, base){
     
     var _t = instance.web._t,
         _lt = instance.web._lt;
@@ -22,11 +21,11 @@ openerp.unleashed.module('trobz_dashboard').ready(function(instance, dashboard, 
         PanelLayout = dashboard.views('PanelLayout');
     
    
-    instance.web.views.add('dashboard', 'instance.trobz_dashboard.DashboardView');
-    instance.trobz_dashboard.DashboardView = instance.web.View.extend({
+    instance.web.views.add('dashboard', 'instance.dashboard.DashboardView');
+    instance.dashboard.DashboardView = instance.web.View.extend({
         
         display_name: _lt('Dashboard'),
-        template: "TrobzDashboard",
+        template: "Dashboard",
         view_type: 'form',
         
        
@@ -47,7 +46,7 @@ openerp.unleashed.module('trobz_dashboard').ready(function(instance, dashboard, 
    
             
             
-            var debug = board = this.board = new Board({
+            var board = this.board = new Board({
                 id: this.board_id
             });
             
@@ -81,7 +80,7 @@ openerp.unleashed.module('trobz_dashboard').ready(function(instance, dashboard, 
                 state.push();
        
                 var region = self.region = new Marionette.Region({
-                    el: '#trobz_board'
+                    el: '#board'
                 });
                 
                 $.when(state.process(), this.view_loaded).done(function(){
@@ -182,7 +181,7 @@ openerp.unleashed.module('trobz_dashboard').ready(function(instance, dashboard, 
         
         print: function(){
             var $openerp = $('.openerp'),
-                html = Renderer.render('TrobzDashboard.print');
+                html = Renderer.render('Dashboard.print');
             
             this.views.toolbar.stopSliding();
             this.views.widgets.resetSliding();
@@ -317,7 +316,7 @@ openerp.unleashed.module('trobz_dashboard').ready(function(instance, dashboard, 
         	// For instance: order_id.partner_id.country_id.name
         	$('.oe_view_manager').before(
         		$('<div class="search outside">').html(
-        		    Renderer.render('TrobzDashboard.metric_info', {
+        		    Renderer.render('Dashboard.metric_info', {
                         operators: search.operators,
                         group_size: _(groups).size(),
                         groups: groups,

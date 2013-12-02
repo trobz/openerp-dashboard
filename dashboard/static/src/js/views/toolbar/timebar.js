@@ -1,11 +1,11 @@
-openerp.unleashed.module('trobz_dashboard',function(dashboard, _, Backbone, base){
+openerp.unleashed.module('dashboard',function(dashboard, _, Backbone, base){
  
     var ItemView = Marionette.ItemView,
         _super = ItemView.prototype;
 
     var TimeBar = ItemView.extend({
         
-        template: 'TrobzDashboard.timebar',
+        template: 'Dashboard.timebar',
         
         ui: { 
             type: '.period_type span',
@@ -64,7 +64,7 @@ openerp.unleashed.module('trobz_dashboard',function(dashboard, _, Backbone, base
             this.ui.daterange.daterangepicker(
                 {
                     //FIXME: made to have the datepicker inside the element in fullscreen mode... the lib has been customized to support it... 
-                    appendToElement: '#trobz_board',
+                    appendToElement: '#board',
                     startDate: this.model.start(),
                     endDate: this.model.end()
                 },

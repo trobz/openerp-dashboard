@@ -1,6 +1,6 @@
 var debug;
 
-openerp.unleashed.module('trobz_dashboard').ready(function(instance, dashboard, _, Backbone, base){
+openerp.unleashed.module('dashboard').ready(function(instance, dashboard, _, Backbone, base){
     
     var _t = instance.web._t,
         _lt = instance.web._lt;
@@ -11,11 +11,11 @@ openerp.unleashed.module('trobz_dashboard').ready(function(instance, dashboard, 
         TestCollection = dashboard.collections('TestCollection');
    
    
-    instance.web.views.add('dashboard_tester', 'instance.trobz_dashboard.DashboardTester');
-    instance.trobz_dashboard.DashboardTester = instance.web.View.extend({
+    instance.web.views.add('dashboard_tester', 'instance.dashboard.DashboardTester');
+    instance.dashboard.DashboardTester = instance.web.View.extend({
         
         display_name: _lt('Dashboard Tester'),
-        template: "TrobzDashboard.tester",
+        template: "Dashboard.tester",
         view_type: 'form',
    
         start: function(){
@@ -28,7 +28,7 @@ openerp.unleashed.module('trobz_dashboard').ready(function(instance, dashboard, 
             });
             
             this.region = new Marionette.Region({
-                el: '#trobz_dashboard_tester'
+                el: '#dashboard_tester'
             });
             
             //stay on the same action by pushing it to url hashes parameters

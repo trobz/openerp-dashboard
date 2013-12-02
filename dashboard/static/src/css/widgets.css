@@ -1,4 +1,4 @@
-#trobz_board #widgets {
+#board #widgets {
     overflow: hidden;
     position: relative;
 }
@@ -8,17 +8,17 @@
     height: 100%;
 }
 
-#trobz_board,
-#trobz_board >  div {
+#board,
+#board >  div {
     height: 100%;
 }
 
-#trobz_board .hidden {
+#board .hidden {
     display: none;    
 }
 
 
 
-#trobz_board #widgets h1 {
+#board #widgets h1 {
     display: none;
 }

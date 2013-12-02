@@ -1,4 +1,4 @@
-openerp.unleashed.module('trobz_dashboard',function(dashboard, _, Backbone, base){
+openerp.unleashed.module('dashboard',function(dashboard, _, Backbone, base){
 
     var Renderer = Marionette.Renderer,
         View = Marionette.ItemView,
@@ -8,10 +8,10 @@ openerp.unleashed.module('trobz_dashboard',function(dashboard, _, Backbone, base
         
         className: 'metric_info',
     
-        template: 'TrobzDashboard.widget.search.group',
+        template: 'Dashboard.widget.search.group',
         
         templates: {
-            'form': 'TrobzDashboard.search.group.form',
+            'form': 'Dashboard.search.group.form',
         },
         
           events: {

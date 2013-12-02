@@ -1,10 +1,10 @@
 <template>
 
-<t t-name="TrobzDashboard.tester">
-    <div id="trobz_dashboard_tester" class="bootstrap_scope" />
+<t t-name="Dashboard.tester">
+    <div id="dashboard_tester" class="bootstrap_scope" />
 </t>
 
-<t t-name="TrobzDashboard.tester.widgets">
+<t t-name="Dashboard.tester.widgets">
     <div class="panel panel-primary">
         <div class="panel-heading">
             <h3 class="panel-title">Widgets</h3>
@@ -16,7 +16,7 @@
     </div>
 </t>
 
-<t t-name="TrobzDashboard.tester.widget">
+<t t-name="Dashboard.tester.widget">
     <button type="button" class="test btn btn-small btn-primary">Test</button>
     <span class="badge"><t t-esc="model.metrics.length" /> metric<t t-esc="(model.metrics.length > 1 ? 's' : '')" /></span>
 
@@ -35,7 +35,7 @@
     
 </t>
 
-<t t-name="TrobzDashboard.tester.result">
+<t t-name="Dashboard.tester.result">
     <i t-att-class="icon + ' text-' + state"></i>
     <span t-att-class="'text-' + state + ' test-label' + (model.hasMessage() ? ' clickable' : '')"><t t-esc="model.get('label')" /></span>
     

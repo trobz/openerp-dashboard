@@ -1,4 +1,4 @@
-openerp.unleashed.module('trobz_dashboard',function(dashboard, _, Backbone, base){
+openerp.unleashed.module('dashboard',function(dashboard, _, Backbone, base){
  
     var TimeBar = dashboard.views('TimeBar'),
         SearchView = dashboard.views('Search');
@@ -13,7 +13,7 @@ openerp.unleashed.module('trobz_dashboard',function(dashboard, _, Backbone, base
             searchbar: '#searchbar'
         },
         
-        template: 'TrobzDashboard.toolbar',
+        template: 'Dashboard.toolbar',
         
         events: {
             'click .board_action .print_action': 'print',
@@ -98,7 +98,7 @@ openerp.unleashed.module('trobz_dashboard',function(dashboard, _, Backbone, base
         slidingMode: function(e){
             if(e) e.preventDefault();
             
-            var html = Marionette.Renderer.render('TrobzDashboard.toolbar.sliding');
+            var html = Marionette.Renderer.render('Dashboard.toolbar.sliding');
             this.ui.mode.empty().html(html);
         
             var $time = this.$el.find('.sliding_timeout');
@@ -144,7 +144,7 @@ openerp.unleashed.module('trobz_dashboard',function(dashboard, _, Backbone, base
             dashboard.trigger('mode', 'list');
             dashboard.trigger('animate:stop');        
             
-            var html = Marionette.Renderer.render('TrobzDashboard.toolbar.list');
+            var html = Marionette.Renderer.render('Dashboard.toolbar.list');
             this.ui.mode.empty().html(html);
         },
         

@@ -1,4 +1,4 @@
-openerp.unleashed.module('trobz_dashboard',function(dashboard, _, Backbone, base){
+openerp.unleashed.module('dashboard',function(dashboard, _, Backbone, base){
 
     var SearchView = dashboard.views('Search'),
         Status = dashboard.views('WidgetStatus'),
@@ -12,7 +12,7 @@ openerp.unleashed.module('trobz_dashboard',function(dashboard, _, Backbone, base
         
         className: 'widget',
         
-        template: 'TrobzDashboard.widget',
+        template: 'Dashboard.widget',
         
         events: {
             'click .toggle_search': 'toggleSearch',

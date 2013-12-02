@@ -7,7 +7,7 @@
 
 
 #print-dashboard .button,
-#trobz_board .button {
+#board .button {
     display: inline-block;
     padding: 4px 6px;
     border: 1px solid #aaa;
@@ -18,7 +18,7 @@
 }
 
 #print-dashboard .button,
-#trobz_board .button:hover {
+#board .button:hover {
     background: #fdfdfd;
     color:  rgb(48, 132, 199);
 }

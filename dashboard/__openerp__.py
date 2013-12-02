@@ -1,16 +1,15 @@
 # -*- coding: utf-8 -*-
 {
-    'name': 'Trobz Dashboard',
+    'name': 'Dashboard',
     'version': '1.0',
-    'category': 'Dashboard',
+    'category': 'Data Visualization',
     'description': """
 Creates Interactive and customizable Dashboard, with widgets: Metric, List, Graph and Combined Graph 
     """,
     'author': 'trobz',
-    'website': 'http://trobz.com',
+    'website': 'https://github.com/trobz/openerp-dashboard',
     'depends': [
-        'base',
-        'web',
+        'web_unleashed',
         'web_unleashed_extra'
     ],
     
