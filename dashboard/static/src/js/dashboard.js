@@ -116,13 +116,13 @@ openerp.unleashed.module('dashboard').ready(function(instance, dashboard, _, Bac
         },
         
         setGlobalDomain: function(field, operator, value){
-            board.widgets.each(function(widget){
+            this.board.widgets.each(function(widget){
                 widget.searchModel.addDomain(field, operator, value, {global: true});
             });
         },
         
         removeGlobalDomain: function(field, operator, value){
-            board.widgets.each(function(widget){
+            this.board.widgets.each(function(widget){
                 widget.searchModel.removeDomain(field, operator, value, {global: true});
             });
         },
