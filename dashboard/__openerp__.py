@@ -10,6 +10,7 @@ Creates Interactive and customizable Dashboard, with widgets: Metric, List, Grap
     'website': 'https://github.com/trobz/openerp-dashboard',
     'depends': [
         'web_graph',
+        'web_serialized',
         'web_unleashed',
         'web_unleashed_extra'
     ],
