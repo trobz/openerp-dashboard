@@ -2,7 +2,6 @@
 
 
     <t t-name="Dashboard.widgets">
-        <h1><t t-esc="name" /></h1>
         <div class="widgets"></div>
     </t>
     

@@ -1,9 +1,13 @@
+#board .daterangepicker_start_input input,
+#board .daterangepicker_end_input input {
+    width: 150px;
+}
+
 #toolbar {
     margin: 0;
     border-bottom: 2px solid #ddd;
     background: #efefef;
     overflow: auto;
-    
 }
 
 #toolbar .section {
