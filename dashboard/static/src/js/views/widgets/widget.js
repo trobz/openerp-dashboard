@@ -125,9 +125,11 @@ openerp.unleashed.module('dashboard',function(dashboard, _, Backbone, base){
         
             
             promise = this.model.execute(options);
-            
+
+            this.bindUIElements();
+
             var $loader = this.ui.loader;
-            
+
             $loader.attr('class', 'loader icon-refresh icon-spin');
             promise.done(function(){
                 $loader.attr('class', 'loader invisible icon-refresh');

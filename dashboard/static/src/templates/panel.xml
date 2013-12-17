@@ -1,7 +1,6 @@
 <template>
 
 <t t-name="Dashboard.panel">
-    HELLO
     <div id="toolbar"></div>
     <div id="widgets"></div>
 </t>

@@ -42,32 +42,29 @@ openerp.unleashed.module('dashboard').ready(function(instance, dashboard, _, Bac
 
             this.models = { board: board };
 
-
-
             return this._super()
         },
 
 
-        ready: function(){
+        configure: function(data){
 
             //views, instantiated after state processing (widgets views require fetched models)
             var Board = dashboard.views('Board');
 
             var board = new Board({
+                template: this.arch.get('dashboard.template', 'Dashboard.panel'),
                 model: this.models.board,
-                debug: this.session.debug
+                debug: this.session.debug,
+                Widgets: this.arch.get('dashboard.widgets.static-position', false) ? 'StaticWidgets' : 'Widgets'
             });
 
             this.views = { board: board };
-
-            //display views
-            this.panel.dashboard.directShow(this.views.board);
-
-            this.bind();
         },
 
 
-        bind: function(){
+        ready: function(){
+            this.panel.dashboard.directShow(this.views.board);
+
             //listen module events
             dashboard.on('open:list',this.openList,this);
             dashboard.on('fullscreen', this.fullscreen, this);

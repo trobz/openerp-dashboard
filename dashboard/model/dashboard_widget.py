@@ -4,6 +4,9 @@
 from openerp.osv import osv, fields
 from openerp.addons.dashboard.utils.model import metric_support #@UnresolvedImport 
 
+from base64 import b64encode
+from os import urandom
+
 class dashboard_widget(osv.osv, metric_support):
 
     _name = "dashboard.widget"
@@ -36,11 +39,23 @@ class dashboard_widget(osv.osv, metric_support):
             
         return result
 
+    def update_identifier(self, cr, uid, ids, name, context=None):
+        t = '-'.join(name.split())
+        u = ''.join([c for c in t if c.isalnum() or c=='-'])
+        identifier = u.rstrip('-').lower()
+        return {
+            'value': {
+                'identifier': identifier
+            }
+        }
+
+
     _columns = {
         'name': fields.char('Name'),
+        'identifier': fields.char('Identifier', required=True),
+
         'type': fields.selection((('numeric','Numeric'), ('list','List'), ('graph','Graph')), 'Widget type'),
-        
-        
+
         'limit': fields.selection((('all','All'), ('5','5'), ('10','10'), ('80','80'),('100','100'),('200','200')), 'Pager limit'),
         
         'method': fields.char('Model Method', help="Widget model method to execute related metrics"),
@@ -55,7 +70,13 @@ class dashboard_widget(osv.osv, metric_support):
     _defaults = {
         'method': 'execute',
         'limit': 'all',
-   }
+    }
+
+    _sql_constraints = [
+            ('unique_identifier', 'UNIQUE (identifier)', 'The rule identifier must be unique')
+        ]
+
+
 
 
 

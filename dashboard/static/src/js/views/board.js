@@ -1,5 +1,7 @@
 openerp.unleashed.module('dashboard',function(dashboard, _, Backbone, base){
 
+    var Region = base.views('Region');
+
     var Layout = Backbone.Marionette.Layout,
         _super = Layout.prototype;
 
@@ -7,6 +9,9 @@ openerp.unleashed.module('dashboard',function(dashboard, _, Backbone, base){
     var Board = Layout.extend({
 
         template: 'Dashboard.panel',
+
+        regionType: Region,
+
 
         getTemplate: function(){
             return this.options.template
@@ -42,8 +47,8 @@ openerp.unleashed.module('dashboard',function(dashboard, _, Backbone, base){
         },
 
         onRender: function(){
-            this.toolbar.show(this.views.toolbar);
-            this.widgets.show(this.views.widgets);
+            this.toolbar.directShow(this.views.toolbar);
+            this.widgets.directShow(this.views.widgets);
         },
 
         refresh: function(){

@@ -89,6 +89,7 @@ Creates Interactive and customizable Dashboard, with widgets: Metric, List, Grap
 
         'static/src/js/views/widgets/widget.js',
         'static/src/js/views/widgets/widgets.js',
+        'static/src/js/views/widgets/widgets.static.js',
 
         'static/src/js/views/board.js',
 
