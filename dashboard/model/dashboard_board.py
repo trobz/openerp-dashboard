@@ -26,6 +26,7 @@ class dashboard_board(osv.osv):
                 widgets.append({
                     'id': widget.id,
                     'name': widget.name,
+                    'identifier': widget.identifier,
                     'type': widget.type,
                     'method': widget.method,
                     'limit': widget.limit,

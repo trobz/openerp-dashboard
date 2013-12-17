@@ -10,6 +10,7 @@ Creates Interactive and customizable Dashboard, with widgets: Metric, List, Grap
     'website': 'https://github.com/trobz/openerp-dashboard',
     'depends': [
         'web_graph',
+        'web_serialized',
         'web_unleashed',
         'web_unleashed_extra'
     ],
@@ -42,11 +43,9 @@ Creates Interactive and customizable Dashboard, with widgets: Metric, List, Grap
     'js': [
         # libs
         'static/lib/bootstrap-daterangepicker/daterangepicker.js',
-        'static/lib/jquery-transit/jquery.transit.min.js',
 
         # fix bugs in flotr2 lib
         'static/src/js/extends/flotr2.js',
-
 
         'static/src/js/models/state.js',
         'static/src/js/models/period.js',
@@ -90,6 +89,9 @@ Creates Interactive and customizable Dashboard, with widgets: Metric, List, Grap
 
         'static/src/js/views/widgets/widget.js',
         'static/src/js/views/widgets/widgets.js',
+        'static/src/js/views/widgets/widgets.static.js',
+
+        'static/src/js/views/board.js',
 
         'static/src/js/views/panel.js',
 

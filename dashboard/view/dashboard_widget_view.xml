@@ -10,7 +10,8 @@
                     <notebook>
                         <page string="General">
                             <group>
-                                <field name="name" />
+                                <field name="name" on_change="update_identifier(name)" />
+                                <field name="identifier"  />
                                 <field name="type" />
                                 <field name="method" />
                                 <field name="limit" />
@@ -31,6 +32,7 @@
             <field name="arch" type="xml">
                 <tree string="Widgets">
                     <field name="name"/>
+                    <field name="identifier" />
                     <field name="type"/>
                     <field name="method" />
                             

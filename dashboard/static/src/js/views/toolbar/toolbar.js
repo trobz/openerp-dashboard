@@ -147,7 +147,12 @@ openerp.unleashed.module('dashboard',function(dashboard, _, Backbone, base){
             var html = Marionette.Renderer.render('Dashboard.toolbar.list');
             this.ui.mode.empty().html(html);
         },
-        
+
+        serializeData: function(data){
+            return {
+                static_position: dashboard.arch.get('dashboard.widgets.static-position', false)
+            };
+        }
     });
 
     dashboard.views('Toolbar', Toolbar);

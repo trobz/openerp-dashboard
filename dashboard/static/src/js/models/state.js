@@ -11,7 +11,8 @@ openerp.unleashed.module('dashboard', function(dashboard, _, Backbone){
             view_type: null,
         },
         
-        link: function(period){
+        link: function(obj){
+            this.board = obj.board;
         },
         
         bind: function(){
@@ -21,7 +22,9 @@ openerp.unleashed.module('dashboard', function(dashboard, _, Backbone){
         },
         
         /* processing */
-        process: function(){},
+        process: function(){
+            return this.board.fetch();
+        },
         
         push: function(){
             this.trigger('change', this);

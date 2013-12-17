@@ -1,17 +1,13 @@
 openerp.unleashed.module('dashboard',function(dashboard, _, Backbone, base){
- 
-    var Layout = Marionette.Layout,
-        _super = Layout.prototype;
 
-    var PanelLayout = Layout.extend({
-        template: 'Dashboard.panel',
-        
+    var Panel = base.views('Panel'),
+        _super = Panel.prototype;
+
+    var DashboardPanel = Panel.extend({
         regions: {
-            toolbar: '#toolbar',
-            widgets: '#widgets'
+            dashboard: '#board'
         }
     });
 
-    dashboard.views('PanelLayout', PanelLayout);
-
+    dashboard.views('Panel', DashboardPanel);
 });
