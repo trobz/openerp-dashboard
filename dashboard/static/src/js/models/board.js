@@ -52,12 +52,14 @@ openerp.unleashed.module('dashboard', function(dashboard, _, Backbone, base){
             _(data.global_field_refs).each(function(field_ref){
                 
                 this.widgets.each(function(widget){
-                    field = widget.metrics.fields.types('domain').oneByRef(field_ref);
-                    if(!field){
-                        throw new Error('global field reference "' + field_ref + '" with type "domain" can not be found in widget "' + widget.get('name') + '"');
+                    var widget_field = widget.metrics.fields.types('domain').oneByRef(field_ref);
+                    if(!widget_field){
+                        console.warn('global field reference "' + field_ref + '" with type "domain" can not be found in widget "' + widget.get('name') + '"');
                     }
+                    field = widget_field || field;
                 });
-                
+
+                console.log(field);
                 global_fields.add(field);
             }, this);
             
