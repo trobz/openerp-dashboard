@@ -582,13 +582,17 @@ class metrics():
              
         converted_domain = []
         for criteria in domain:
-            if len(criteria) == 3:
-                clone = copy.copy(criteria)
-                clone[0] = self.get_field(metric, clone[0])
-                converted_domain.append(clone)
-            else:
-                converted_domain.append(copy.copy(criteria))
-         
+            try:
+                if len(criteria) == 3:
+                    clone = copy.copy(criteria)
+                    clone[0] = self.get_field(metric, clone[0])
+                    converted_domain.append(clone)
+                else:
+                    converted_domain.append(copy.copy(criteria))
+            except Exception as e:
+                logging.warning(e)
+                pass
+            
         converted_args = {
            'group': [],
            'order': [],
