@@ -63,7 +63,8 @@ openerp.unleashed.module('dashboard',function(dashboard, _, Backbone, base){
             
             this.ui.daterange.daterangepicker(
                 {
-                    //FIXME: made to have the datepicker inside the element in fullscreen mode... the lib has been customized to support it... 
+                    //FIXME: made to have the datepicker inside the element in fullscreen mode...
+                    //       the lib has been customized to support it...
                     appendToElement: '#board',
                     startDate: this.model.start(),
                     endDate: this.model.end()
@@ -89,7 +90,10 @@ openerp.unleashed.module('dashboard',function(dashboard, _, Backbone, base){
             this.ui.name.find('option:selected').attr('selected', false);
             this.ui.name.find('option[value="' + this.model.get('name') + '"]').attr('selected', true);
             
-            this.ui.daterange.text(this.model.start().format(this.options.dateformat) + ' - ' + this.model.end().format(this.options.dateformat));
+            this.ui.daterange.text(
+                this.model.start().format(this.options.dateformat) + ' - ' +
+                this.model.end().format(this.options.dateformat)
+            );
             this.ui.daterangepicker.startDate = this.model.start();
             this.ui.daterangepicker.endDate = this.model.end();
         },

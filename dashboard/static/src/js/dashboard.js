@@ -6,7 +6,8 @@ openerp.unleashed.module('dashboard').ready(function(instance, dashboard, _, Bac
 
     instance.web.views.add('dashboard', 'instance.dashboard.DashboardView');
     instance.dashboard.DashboardView = UnleashedView.extend({
-        
+
+        module: dashboard,
         display_name: base._lt('Dashboard'),
         template: "Dashboard",
         view_type: 'dashboard',

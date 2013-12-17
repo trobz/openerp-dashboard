@@ -93,3 +93,15 @@
 #toolbar .oe_pager_group {
     margin: 0 5px;
 }
+
+#toolbar div.period_type span.button,
+#toolbar div.period_type span.button.selected {
+    border: none !important;
+    background: transparent !important;
+    -webkit-box-shadow:none !important;
+    box-shadow:none !important;
+}
+
+#toolbar .period_type i {
+    font-size: 24px;
+}

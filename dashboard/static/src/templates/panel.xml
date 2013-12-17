@@ -34,12 +34,14 @@
     <div class="section board_action right">
         <span class="button print_action"><i class="icon-print"></i></span>
     </div>
-    
+
+    <t t-if="!static_position">
     <div class="section board_action right">
         <span class="mode">
             <t t-call="Dashboard.toolbar.list" />
         </span>
-    </div>    
+    </div>
+    </t>
 
     <div class="section board_action right">
         <span class="button search_action"><i class="icon-search"></i></span>
@@ -66,9 +68,9 @@
         </select>
     </div>
     <div class="section period_type">
-        <span class="button rolling" title="Rolling" data-type="rolling"><i class="icon-play"></i></span>
-        <span class="button last_period" title="Last full period" data-type="last_period"><i class="icon-step-backward"></i></span>
-        <span class="button calendar" title="Period in progress" data-type="calendar"><i class="icon-step-forward"></i></span>
+        <span class="button rolling" title="Rolling" data-type="rolling"><i class="icon-period-rolling"></i></span>
+        <span class="button last_period" title="Last full period" data-type="last_period"><i class="icon-period-last-full"></i></span>
+        <span class="button calendar" title="Period in progress" data-type="calendar"><i class="icon-period-progress"></i></span>
     </div>
 
 

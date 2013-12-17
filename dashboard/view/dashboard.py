@@ -30,6 +30,7 @@ class IrUiView(osv.Model):
     _inherit = 'ir.ui.view'
 
     def __init__(self, pool, cr):
+
         res = super(IrUiView, self).__init__(pool, cr)
         select = [k for k, v in self._columns['type'].selection]
         if VIEW_TYPE[0] not in select:
