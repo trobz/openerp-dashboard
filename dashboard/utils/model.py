@@ -271,8 +271,7 @@ class metrics():
                     
         # execute one query in UNION for all metrics
         if is_graph_metrics:
-        
-                
+
             global_args = stacks['global']
             order = global_args['order']
             group = global_args['group']
@@ -286,12 +285,17 @@ class metrics():
             query_outputs = {}
             queries = []
             params = []
-            
+            order_ref_id = order[0].reference
+
             for metric_id, stack in stacks.items():
                 no_result = stack['no_result']
                 output_ref = stack['output'].reference
-                outputs.append('coalesce(max(result."%s"), %s) as "%s"' % (output_ref, no_result, output_ref))
-                query_outputs[metric_id] = 'NULL::integer as "%s"' % (output_ref)
+                output_ref_id = "%s_%s" % (output_ref, metric_id)
+                if order[0].reference == output_ref:
+                    order_ref_id = output_ref_id
+
+                outputs.append('coalesce(max(result."%s"), %s) as "%s"' % (output_ref_id, no_result, output_ref))
+                query_outputs[metric_id] = 'NULL::integer as "%s"' % (output_ref_id)
             
             
             for metric_id, stack in stacks.items():
@@ -303,7 +307,7 @@ class metrics():
                 
                 order_by = ''
                 if order:
-                    order_by = "ORDER BY date_trunc('%s', gdate.gtime) %s" % (order[0].period, order[1]) if order[0].period else 'ORDER BY max(result."%s") %s NULLS LAST' % (order[0].reference, order[1]) 
+                    order_by = "ORDER BY date_trunc('%s', gdate.gtime) %s" % (order[0].period, order[1]) if order[0].period else 'ORDER BY max(result."%s") %s NULLS LAST' % (order_ref_id, order[1])
                     
                 query = self.envelopes['query_date'].format(** {
                   "start": period['start'],
@@ -327,9 +331,9 @@ class metrics():
                   "group": group.reference,
                   "limit": "LIMIT %s" % (limit), 
                   "offset": "OFFSET %s" % (offset), 
-                  "order": 'ORDER BY max(result."%s") %s NULLS LAST' % (order[0].reference, order[1]) if order else ""
+                  "order": 'ORDER BY max(result."%s") %s NULLS LAST' % (order_ref_id, order[1]) if order else ""
                 })
-                
+
             cr.execute(query, params)
    
             fetch = cr.dictfetchall()
@@ -513,7 +517,8 @@ class metrics():
         fields = []
         for mid, output in outputs.items():
             if mid == metric_id:
-                fields.append(matches.group(2))
+                field = "%s_%s" % (matches.group(2), metric_id)
+                fields.append(field)
             else:
                 fields.append(output)
         
@@ -543,12 +548,12 @@ class metrics():
         for criteria in domain:
             if len(criteria) == 3:
                 # set and is not set operator convert
-                if criteria[1] == 'is':
-                    criteria[1] = '!='
-                    criteria[2] = False
-                if criteria[1] == 'ins':
-                    criteria[1] = '='
-                    criteria[2] = False
+                # if criteria[1] == 'is':
+                #     criteria[1] = '!='
+                #     criteria[2] = False
+                # if criteria[1] == 'ins':
+                #     criteria[1] = '='
+                #     criteria[2] = False
 
                 clone = copy.copy(criteria)
                 clone[0] = clone[0].sql_name

@@ -399,15 +399,16 @@ class expression(object):
                     query = '(%s AND %s IS NOT NULL)' % (query, left)  # needed only for TRUE.
             else:  # Must not happen
                 raise ValueError("Invalid domain term %r" % (leaf,))
-        # is not set operator
-        elif operator == '=':
-            print ''
-            query = '%s IS NULL ' % (left)
-            params = []
-        # set operator
-        elif operator == '!=':
-            query = '%s IS NOT NULL' % (left)
-            params = []
+
+        # # is not set operator
+        # elif operator == '=':
+        #     print ''
+        #     query = '%s IS NULL ' % (left)
+        #     params = []
+        # # set operator
+        # elif operator == '!=':
+        #     query = '%s IS NOT NULL' % (left)
+        #     params = []
 
         else:
             need_wildcard = operator in ('like', 'ilike', 'not like', 'not ilike')
