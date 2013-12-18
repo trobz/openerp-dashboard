@@ -1,8 +1,6 @@
 openerp.unleashed.module('dashboard',function(dashboard, _, Backbone, base){
  
-    var TimeBar = dashboard.views('TimeBar'),
-        SearchView = dashboard.views('Search');
- 
+
     var Layout = Marionette.Layout,
         _super = Layout.prototype;
 
@@ -34,6 +32,9 @@ openerp.unleashed.module('dashboard',function(dashboard, _, Backbone, base){
         }, 
         
         onRender: function(){
+            var TimeBar = dashboard.views('TimeBar'),
+                SearchView = dashboard.views('Search');
+
             this.views = {
                 timebar: new TimeBar({
                     model: this.model.period

@@ -59,7 +59,6 @@ openerp.unleashed.module('dashboard', function(dashboard, _, Backbone, base){
                     field = widget_field || field;
                 });
 
-                console.log(field);
                 global_fields.add(field);
             }, this);
             

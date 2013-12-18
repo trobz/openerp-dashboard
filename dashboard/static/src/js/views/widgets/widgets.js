@@ -14,6 +14,11 @@ openerp.unleashed.module('dashboard',function(dashboard, _, Backbone, base){
         itemViewContainer: '.widgets',
         
         itemView: Widget,
+
+        ui: {
+            widgets: '.widgets'
+        },
+
         itemViewOptions: function(model, index) {
             return {
                 period: this.period,
@@ -70,23 +75,23 @@ openerp.unleashed.module('dashboard',function(dashboard, _, Backbone, base){
         
         
         resetSliding: function(){
-            this.$el.find('.graph').empty();
+            this.ui.widgets.find('.graph').empty();
             
-            this.$el.css({
+            this.ui.widgets.css({
                 x: 0,
                 y: 0
             });
         },
         
         next: function(){
-            if(this.type == 'sliding'){
+            if(this.type == 'sliding' && this.previousAnim.state() != 'pending'){
                 this.slide('next');
                 
             }
         },
         
         previous: function(){
-            if(this.type == 'sliding'){
+            if(this.type == 'sliding' && this.previousAnim.state() != 'pending'){
                 this.slide('previous');
             }
         },
@@ -95,19 +100,19 @@ openerp.unleashed.module('dashboard',function(dashboard, _, Backbone, base){
             
             direction = direction || 'next';
             
-            var $el = this.$el,
+            var $el = this.ui.widgets,
                 size = this.size,
                 children = this.children,
                 self = this,
                 x = parseInt($el.css('x')),
-                last = - (this.size.width * (this.collection.length - 2));
+                last = - (this.size.width * (this.collection.length - 1));
                 
                 
             if(direction == 'next'){
-                pos = x + this.size.width > last ? x - this.size.width : 0;
+                pos = x - this.size.width >= last ? x - this.size.width : 0;
             }
             else {
-                pos = x + this.size.width < 0 ? x + this.size.width : last; 
+                pos = x + this.size.width <= 0 ? x + this.size.width : last;
             }
                 
             this.previousAnim.done(function(){
@@ -133,13 +138,13 @@ openerp.unleashed.module('dashboard',function(dashboard, _, Backbone, base){
         mode: function(type){
             this.type = type;
             
-            this.$el.attr({
+            this.ui.widgets.attr({
                 style: ''
             });
             
             if(type == 'sliding'){
                 var size = this.size = {
-                    width: this.$el.width(),
+                    width: this.ui.widgets.width(),
                 };
                 
                 this.children.each(function(widget, index){
@@ -161,7 +166,7 @@ openerp.unleashed.module('dashboard',function(dashboard, _, Backbone, base){
                     });
                 });
                 
-                this.$el.attr({
+                this.ui.widgets.attr({
                     style: ''   
                 });
             }

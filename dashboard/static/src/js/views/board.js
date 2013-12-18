@@ -47,6 +47,7 @@ openerp.unleashed.module('dashboard',function(dashboard, _, Backbone, base){
         },
 
         onRender: function(){
+            this.$el.addClass('list');
             this.toolbar.directShow(this.views.toolbar);
             this.widgets.directShow(this.views.widgets);
         },

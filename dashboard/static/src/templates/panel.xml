@@ -87,12 +87,12 @@
     
      <ul class="pager oe_pager_group">
         <li>
-            <a t-att-class="'oe_i prev-widget' + (previous ? '' : ' disabled')" 
+            <a class="oe_i prev-widget"
                data-pager-action="previous" 
                type="button">(</a>
         </li>
         <li>
-            <a t-att-class="'oe_i next-widget' + (next ? '' : ' disabled')" 
+            <a class="oe_i next-widget"
                data-pager-action="next" 
                type="button">)</a>
         </li>
