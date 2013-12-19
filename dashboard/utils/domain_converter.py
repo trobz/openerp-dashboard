@@ -22,7 +22,7 @@ DOMAIN_OPERATORS = (NOT_OPERATOR, OR_OPERATOR, AND_OPERATOR)
 # used. In this case its right operand has the form (subselect, params).
 TERM_OPERATORS = ('=', '!=', '<=', '<', '>', '>=', '=?', '=like', '=ilike',
                   'like', 'not like', 'ilike', 'not ilike', 'in', 'not in',
-                  'child_of')
+                  'child_of', 'is', 'ins')
 
 # A subset of the above operators, with a 'negative' semantic. When the
 # expressions 'in NEGATIVE_TERM_OPERATORS' or 'not in NEGATIVE_TERM_OPERATORS' are used in the code
@@ -401,14 +401,14 @@ class expression(object):
                 raise ValueError("Invalid domain term %r" % (leaf,))
 
         # # is not set operator
-        # elif operator == '=':
-        #     print ''
-        #     query = '%s IS NULL ' % (left)
-        #     params = []
-        # # set operator
-        # elif operator == '!=':
-        #     query = '%s IS NOT NULL' % (left)
-        #     params = []
+        elif operator == 'is':
+            print ''
+            query = '%s IS NULL ' % (left)
+            params = []
+        # set operator
+        elif operator == 'ins':
+            query = '%s IS NOT NULL' % (left)
+            params = []
 
         else:
             need_wildcard = operator in ('like', 'ilike', 'not like', 'not ilike')

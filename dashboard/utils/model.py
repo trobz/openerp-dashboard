@@ -547,14 +547,6 @@ class metrics():
         converted_domain = []
         for criteria in domain:
             if len(criteria) == 3:
-                # set and is not set operator convert
-                # if criteria[1] == 'is':
-                #     criteria[1] = '!='
-                #     criteria[2] = False
-                # if criteria[1] == 'ins':
-                #     criteria[1] = '='
-                #     criteria[2] = False
-
                 clone = copy.copy(criteria)
                 clone[0] = clone[0].sql_name
                 converted_domain.append(clone)
