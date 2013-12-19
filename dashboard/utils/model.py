@@ -294,7 +294,7 @@ class metrics():
                 if order[0].reference == output_ref:
                     order_ref_id = output_ref_id
 
-                outputs.append('coalesce(max(result."%s"), %s) as "%s"' % (output_ref_id, no_result, output_ref))
+                outputs.append('coalesce(max(result."%s"), %s) as "%s"' % (output_ref_id, no_result, output_ref_id))
                 query_outputs[metric_id] = 'NULL::integer as "%s"' % (output_ref_id)
             
             
@@ -341,21 +341,22 @@ class metrics():
             columns_index = {}
             for column in cr.description:
                 columns_index[column.name] = column
-    
+
             metric_names = []
             group_ref = group.reference
             for metric_id, stack in stacks.items():
                 output_ref = stack['output'].reference
-                
+                output_ref_id = "%s_%s" % (output_ref, metric_id)
+
                 desc = []
                 desc.append(columns_index[group_ref])
-                desc.append(columns_index[output_ref])
+                desc.append(columns_index[output_ref_id])
               
                 res = []
                 for item in fetch:
                     data = {}
                     data[group_ref] = item[group_ref]
-                    data[output_ref] = item[output_ref]
+                    data[output_ref] = item[output_ref_id]
                     res.append(data)
                 
                 result[metric_id] = {'columns': desc, 'results': res}
