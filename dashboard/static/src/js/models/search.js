@@ -23,11 +23,31 @@ openerp.unleashed.module('dashboard', function(dashboard, _, Backbone, base){
         
             this.operators = new Operators();
         },
-        
+
+
+        /*
+         * bind with an other search model
+         */
+        bind: function(search){
+            if(!(search instanceof Search)){
+                throw new Error('search model can only be binded with an other seach object.');
+            }
+            search.on('set:domain', this.addDomain, this);
+            search.on('remove:domain', this.removeDomain, this);
+            search.on('filter:domain', this.filterDomain, this);
+            search.on('set:group', this.addGroup, this);
+            search.on('remove:group', this.removeGroup, this);
+            search.on('reset:group', this.resetGroup, this);
+            search.on('set:order', this.addOrder, this);
+            search.on('remove:order', this.removeOrder, this);
+            search.on('reset:group', this.resetOrder, this);
+
+        },
+
         /*
          * Domain manipulation
          */
-        
+
         addDomain: function(field, operator, value, options){
             if(this.getCriterion(field, operator, value) == null && (value || _(['true', 'false']).contains(operator))){
                 var domain = this.get('domain').slice(0);    
@@ -62,7 +82,21 @@ openerp.unleashed.module('dashboard', function(dashboard, _, Backbone, base){
                 this.trigger('remove:domain', field, operator, value);
             }
         },
-        
+
+        filterDomain: function(field, options){
+            var new_domain = [], domain = this.get('domain');
+            for(var i=0 ; i< domain.length ; i++){
+                if(_.size(domain[i]) < 3){
+                    new_domain.push(domain[i]);
+                }
+                else if(domain[i].field.get('reference') != field.get('reference')){
+                    new_domain.push(domain[i]);
+                }
+            }
+            this.trigger('filter:domain', field, options);
+            this.set('domain', new_domain, options)
+        },
+
         getCriterion: function(field, operator, value){
             var domain = this.get('domain');
             for(var i=0 ; i< domain.length ; i++){
@@ -133,21 +167,23 @@ openerp.unleashed.module('dashboard', function(dashboard, _, Backbone, base){
             if(type != 'ASC' && type != 'DESC'){
                 throw new Error('order type has to be ASC or DESC');
             }
-            this.set('order', [{ 'field': field, 'type': type }], options);    
+            this.set('order', [{ 'field': field, 'type': type }], options);
+            this.trigger('set:order', field, type, options);
         },
         
-        removeOrder: function(field, type){
+        removeOrder: function(field, type, options){
             var order = this.get('order').slice(0),
                 index = this.getOrderIndex(field, type);
             
             if(index != null){
                 order.splice(index, 1);
                 if(order.length == 0 && _.size(this.defaults.order) > 0){
-                    this.addOrder(this.defaults.order.field, this.defaults.order.type);
+                    this.addOrder(this.defaults.order.field, this.defaults.order.type, options);
                 }
                 else {
-                    this.set('order', order);
+                    this.set('order', order, options);
                 }
+                this.trigger('remove:order', field, type, options);
             }
         },
         
@@ -156,7 +192,7 @@ openerp.unleashed.module('dashboard', function(dashboard, _, Backbone, base){
             if(_.size(this.defaults.order) > 0){
                 this.addOrder(this.defaults.order.field, this.defaults.order.type, options);
             }
-            
+            this.trigger('reset:order', options);
         },
         
         getOrderIndex: function(field){
@@ -190,25 +226,35 @@ openerp.unleashed.module('dashboard', function(dashboard, _, Backbone, base){
             this.addGroup(this.defaults.group[0]);
         },
         
-        addGroup: function(field){
-            this.set('group', [field]);    
+        addGroup: function(field, options){
+            this.set('group', [field], options);
+            this.trigger('set:group', field, options);
         },
         
-        removeGroup: function(field){
+        removeGroup: function(field, options){
             var group = this.get('group').slice(0),
                 index = this.getGroupIndex(field);
             
             if(index != null){
                 group.splice(index, 1);
                 if(group.length == 0 && this.defaults.group.length > 0){
-                    this.addGroup(this.defaults.group[0]);
+                    this.addGroup(this.defaults.group[0], options);
                 }
                 else {
-                    this.set('group', group);
+                    this.set('group', group, options);
                 }
+                this.trigger('remove:group', field, options);
             }
         },
-        
+
+        resetGroup: function(options){
+            this.set('group', [], options);
+            if(this.defaults.group.length > 0){
+                this.addGroup(this.defaults.group[0], options);
+            }
+            this.trigger('reset:group', options);
+        },
+
         getGroupIndex: function(field){
             var index = null;
             _(this.get('group')).each(function(gfield, gindex){

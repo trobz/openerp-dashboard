@@ -25,7 +25,8 @@ class dashboard_metric(osv.osv):
                     'sql_name': field.sql_name,
                     'type_names': field.type_names,
                     'field_description': field.field_description,
-                    'period': field.period
+                    'period': field.period,
+                    'field_model': field.field_model
                 })
             
             model_details = { 'id': metric.model.id, 'name': metric.model.name, 'model' : metric.model.model }

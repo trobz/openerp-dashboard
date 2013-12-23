@@ -46,6 +46,9 @@ openerp.unleashed.module('dashboard', function(dashboard, _, Backbone, base){
                 }),
 
                 // set operator
+                new Operator('in', _t('is in'), 'in'),
+
+                // set operator
                 new Operator('is', _t('is set'), 'is'),
                 new Operator('ins', _t('is not set'), 'ins'),
 

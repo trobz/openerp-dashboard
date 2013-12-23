@@ -26,7 +26,8 @@ class dashboard_field(osv.osv):
   
             # field "field_description"
             try:
-                model = self.pool.get(field.field_id.model)
+                field_model = field.field_id.model
+                model = self.pool.get(field_model)
                 description = model.fields_get(cr, uid, [field.field_id.name], context=context)
                 description[field.field_id.name]['name'] = field.field_id.name
                 desc = description[field.field_id.name]
@@ -36,7 +37,8 @@ class dashboard_field(osv.osv):
             result[field.id] = {
                 'period': period,
                 'type_names': types,
-                'field_description': desc
+                'field_description': desc,
+                'field_model': field_model
             }
         
         return result
@@ -51,8 +53,8 @@ class dashboard_field(osv.osv):
         'domain_field_path': fields.char('Domain Field Path', help="The fullname to access one object in a domain, for example: hr_employee.address_id.country_id.name. This is used for the link at the bottom of a widget"),
         
         
-        'field_id': fields.many2one('ir.model.fields','Field', help="field in the model"),
-        'type_ids': fields.many2many('dashboard.field.type',id1='metric_field_id',id2='metric_field_type_id', string='Types', help='Defined the propose of the field: output, filter, group_by, order_by'),
+        'field_id': fields.many2one('ir.model.fields', 'Field', help="field in the model"),
+        'type_ids': fields.many2many('dashboard.field.type', id1='metric_field_id', id2='metric_field_type_id', string='Types', help='Defined the propose of the field: output, filter, group_by, order_by'),
         
         # used to access type names in JSON-RPC without an other query 
         'type_names': fields.function(extra_fields, method=True, type='serialized', string='Tag Names', multi=True, readonly=True),
@@ -62,7 +64,10 @@ class dashboard_field(osv.osv):
         
         # get the period from sql_name, if any
         'period': fields.function(extra_fields, method=True, type='char', string='Period', multi=True, readonly=True),
-        
+
+        # get the field model, if any
+        'field_model': fields.function(extra_fields, method=True, type='char', string='Period', multi=True, readonly=True)
+
     }
         
 
