@@ -34,7 +34,37 @@ class metrics():
             {limit}
             {offset}
             """,
-            
+
+        'query_numeric_date': """
+            SELECT date_trunc('{period}', gdate.gtime) AS "{group_ref}",
+		           numeric_result.{reference} as {reference}
+		    FROM
+            (
+                {query}
+            ) AS numeric_result
+
+            RIGHT OUTER JOIN
+            (
+                SELECT *
+                FROM generate_series ('{start}'::TIMESTAMP, '{end}', '{period_inc}') AS gtime
+            ) AS gdate ON 1 = 1
+            GROUP BY date_trunc('{period}', gdate.gtime), numeric_result.{reference}
+            LIMIT ALL
+		    """,
+
+        'query_numeric_alphanumeric': """
+            SELECT numeric_table.{group_field_name} AS "{group_ref}",
+		           numeric_result.{reference} as {reference}
+		    FROM
+            (
+                {query}
+            ) AS numeric_result
+
+            JOIN {table} AS numeric_table ON 1 = 1
+            GROUP BY numeric_table.{group_field_name}, numeric_result.{reference}
+            LIMIT ALL
+		    """,
+
         'query_string': """
             select result."{reference}" as {reference}, {output} from 
             (
@@ -122,33 +152,39 @@ class metrics():
                 count = res[0]
          
         return count
-    
-    
-    def execute(self, cr, uid, ids, period={}, domain=[], group_by=[], order_by=[], limit="ALL", offset=0, debug=False, security_test=False, context=None):
+
+    def execute(self, cr, uid, ids,
+                period={}, domain=[], group_by=[], order_by=[], limit="ALL", offset=0,
+                debug=False, security_test=False, context=None):
         """
         Execute custom SQL queries to populate a dashboard widget
         """
-        
-        
+
+
         result = {}
         widgets = self.browse(cr, uid, ids, context=context)
-        
+
         for widget in widgets:
-            stacks = self.get_stacks(cr, uid, ids, widget.metric_ids, period=period, domain=domain, group_by=group_by, order_by=order_by, limit=limit, offset=offset, debug=debug, security_test=security_test, context=context) 
-            res, res_debug = self.execute_stacks(cr, uid, widget.metric_ids, stacks, debug=debug, security_test=security_test, context=context)
+            stacks = self.get_stacks(cr, uid, ids, widget.metric_ids,
+                                     period=period, domain=domain, group_by=group_by, order_by=order_by, limit=limit,
+                                     offset=offset, debug=debug, security_test=security_test, context=context)
+            res, res_debug = self.execute_stacks(cr, uid, widget.metric_ids, stacks,
+                                                 debug=debug, security_test=security_test, context=context)
             result[widget.id] = res
-            if debug: 
+            if debug:
                 result[widget.id]['debug'] = {
                     'message': 'queries on widget %s' % (widget.name),
-                    'queries': res_debug 
+                    'queries': res_debug
                 }
-            
-            
+
+
         return result
+
+
     
-                 
-    
-    def get_stacks(self, cr, uid, ids, metric_ids, period={}, domain=[], group_by=[], order_by=[], limit="ALL", offset=0, debug=False, security_test=False, context=None):
+    def get_stacks(self, cr, uid, ids, metric_ids,
+                   period={}, domain=[], group_by=[], order_by=[], limit="ALL", offset=0,
+                   debug=False, security_test=False, context=None):
         """
         Execute metrics SQL queries
         """
@@ -168,7 +204,8 @@ class metrics():
                 # in graph mode, order will be applied to the global query 
                 order_tmp = order_by
                 order_by = []
-                #FIXME: should not disable the limit and offset on sub queries but it"s required if the ordering is different on sub queries and main query...
+                #FIXME: should not disable the limit and offset on sub queries but it's required if the
+                # ordering is different on sub queries and main query...
                 limit = 'ALL'
                 offset = 0
             
@@ -192,7 +229,9 @@ class metrics():
     
     
     def set_stack_globals(self, metric, defaults, stacks, period, group_by, order_by, limit, offset):
-        group = copy.copy(defaults['group_by']) if 'group_by' in defaults and len(group_by) == 0 else copy.copy(group_by)
+        group = copy.copy(defaults['group_by']) \
+                if 'group_by' in defaults and len(group_by) == 0 \
+                else copy.copy(group_by)
         order = copy.copy(order_by)
         
         if len(group) <= 0:
@@ -210,12 +249,16 @@ class metrics():
         } if not 'global' in stacks else stacks['global'] 
         
         try:
-            stacks['global']['order'] = self.convert_order(metric, order[0]) if 'order' not in stacks['global'] else stacks['global']['order']
+            stacks['global']['order'] = self.convert_order(metric, order[0]) \
+                                        if 'order' not in stacks['global'] \
+                                        else stacks['global']['order']
         except:
             pass
         
         try:
-            stacks['global']['group'] = self.convert_group(metric, group[0]) if 'group' not in stacks['global']  else stacks['global']['group']
+            stacks['global']['group'] = self.convert_group(metric, group[0]) \
+                                        if 'group' not in stacks['global']  \
+                                        else stacks['global']['group']
         except:
             pass
         
@@ -242,11 +285,21 @@ class metrics():
     
         e = expression(sql_domain)
         domain_query, domain_params = e.to_sql()
-            
-        query = query.format(** {'generated': domain_query, 'group_sql': group_sql, 'group_ref': group_ref})
-        
-        query = '%s GROUP BY %s' % (query, ','.join(sql_args['group'])) if len(sql_args['group']) > 0 else query
-        query = '%s ORDER BY %s' % (query, ','.join(sql_args['order'])) if len(sql_args['order']) > 0 else query
+
+        def complete_query(query_part, values):
+            part = ''
+            if(len(values) > 0):
+                part = query_part % ','.join(values)
+            return part
+
+        query = query.format(** {
+            'generated': domain_query,
+            'group_sql': group_sql,
+            'group_ref': group_ref,
+            'group_by':  complete_query(' GROUP BY %s ', sql_args['group']),
+            'order_by':  complete_query(' ORDER BY %s ', sql_args['order'])
+        })
+
         query = '%s LIMIT %s' % (query, sql_args['limit']) if sql_args['limit'] is not None else query
         query = '%s OFFSET %s' % (query, sql_args['offset']) if sql_args['offset'] is not None else query
         
@@ -266,11 +319,14 @@ class metrics():
                 # security_test can not be enabled if debug mode is not True too
                 security_test = security_test if debug else False
                 if uid != SUPERUSER_ID or security_test:
-                    stack['query'], warning, security_info = self.add_security_rule(cr, uid, stack['query'], stack['metric'], warning, security_info, security_test)
+                    stack['query'], warning, security_info = self.add_security_rule(
+                        cr, uid, stack['query'], stack['metric'], warning, security_info, security_test
+                    )
                 stack['query'] = self.clean_query(stack['query'])
                     
         # execute one query in UNION for all metrics
         if is_graph_metrics:
+
 
             global_args = stacks['global']
             order = global_args['order']
@@ -279,7 +335,35 @@ class metrics():
             limit = global_args['limit']
             offset = global_args['offset']
             del stacks['global']
-            
+
+            is_date_union = group and group.period and group.field_description['type'] in ['date', 'datetime']
+
+            # numeric metrics have to be embedded in a group_by period query
+            for metric_id, stack in stacks.items():
+                metric = stack['metric']
+                if metric.type == 'numeric':
+                    if is_date_union:
+                        stack['query'] = self.envelopes['query_numeric_date'].format(** {
+                            "start": period['start'],
+                            "end": period['end'],
+                            "group_ref": group.reference,
+                            "reference": stack['output'].reference,
+                            "period": group.period,
+                            "period_inc": "1 %s" % group.period if group.period != 'quarter' else "3 %s" % "month",
+                            "query": stack['query']
+                        })
+                    else:
+                        model = group.field_id.model
+                        table = self.pool.get(model)._table
+                        stack['query'] = self.envelopes['query_numeric_alphanumeric'].format(** {
+                            "group_field_name": group.field_id.name,
+                            "group_ref": group.reference,
+                            "table": table,
+                            "reference": stack['output'].reference,
+                            "query": stack['query']
+                        })
+
+
             # rebuild output parameters
             outputs = []
             query_outputs = {}
@@ -291,23 +375,27 @@ class metrics():
                 no_result = stack['no_result']
                 output_ref = stack['output'].reference
                 output_ref_id = "%s_%s" % (output_ref, metric_id)
+
                 if order[0].reference == output_ref:
                     order_ref_id = output_ref_id
 
                 outputs.append('coalesce(max(result."%s"), %s) as "%s"' % (output_ref_id, no_result, output_ref_id))
                 query_outputs[metric_id] = 'NULL::integer as "%s"' % (output_ref_id)
-            
+
+
             
             for metric_id, stack in stacks.items():
                 queries.append('\n(' + self.replace_outputs(stack['query'], query_outputs, metric_id) + '\n)')
                 params += stack['params']
             
             
-            if group and group.period and group.field_description['type'] in ['date', 'datetime']:
+            if is_date_union:
                 
                 order_by = ''
                 if order:
-                    order_by = "ORDER BY date_trunc('%s', gdate.gtime) %s" % (order[0].period, order[1]) if order[0].period else 'ORDER BY max(result."%s") %s NULLS LAST' % (order_ref_id, order[1])
+                    order_by = "ORDER BY date_trunc('%s', gdate.gtime) %s" % (order[0].period, order[1]) \
+                               if order[0].period \
+                               else 'ORDER BY max(result."%s") %s NULLS LAST' % (order_ref_id, order[1])
                     
                 query = self.envelopes['query_date'].format(** {
                   "start": period['start'],
@@ -381,11 +469,10 @@ class metrics():
         else:
         
             for metric_id, stack in stacks.items():
-                
+
                 cr.execute(stack['query'], stack['params'])
-             
                 result[metric_id] = {'columns': cr.description, 'results': cr.dictfetchall()}
-                    
+
                 if debug:
                     sql = cr.mogrify(stack['query'], stack['params'])
                 
@@ -400,8 +487,7 @@ class metrics():
                     })
     
         return result, debug_result
-    
-    
+
     def clean_query(self, sql):
         
         """
@@ -512,32 +598,34 @@ class metrics():
         rebuild query with parameters slot for other queries, required for UNION
         """
         
-        pattern = re.compile(r"""(?uis)^(.*select .* as [^,]+),(.* as [a-z0-9_'"]+)(.*from.*)""")
+        pattern = re.compile(r"""(?uis)^(.*?select)(.*?)(\W+(?=from).*)""")
         matches = pattern.match(query)
-        
-        fields = []
+
+        field_pattern = re.compile(r"""(?ui)[ \n\r\t]*(.+?[ ]+AS[ ]+['"a-z0-9_\-:]+)(?:,)?""")
+        fields = field_pattern.findall(matches.group(2))
+        last_field = fields.pop()
+
         for mid, output in outputs.items():
             if mid == metric_id:
-                field = "%s_%s" % (matches.group(2), metric_id)
+                field = "%s_%s" % (last_field, metric_id)
                 fields.append(field)
             else:
                 fields.append(output)
         
-        return pattern.sub(u'\\1,' + ','.join(fields) + '\\3', query)
-     
+        return pattern.sub(u'\\1 ' + ','.join(fields) + ' \\3', query)
+
         
     def extract_aggregate_field(self, metric, query):
         """
         extract the last output field, used for graph metrics
         """
-        
-        pattern = re.compile(r"""(?uis)^.*select .* as (?:['"])?([a-z0-9_]+)(?:['"])?.*from""")
+
+        pattern = re.compile(r"""(?uis)^.*?([a-z0-9_]+)\W+(?=from)""")
         matches = pattern.match(query)
         
         if not matches or  matches.lastindex < 1:
             raise Exception('can not get the last output field on metric "%s"' % (metric.name))
-        
-        
+
         return self.get_field(metric, matches.group(1))    
         
     def to_sql(self, domain, arguments):
@@ -604,7 +692,7 @@ class metrics():
         for order in arguments['order']:
             converted_args['order'].append(self.convert_order(metric, order))
          
-        return converted_domain, converted_args;       
+        return converted_domain, converted_args
      
        
     def convert_group(self, metric, group_by):
@@ -634,7 +722,8 @@ class metrics():
         for metric_field in metric.field_ids:
             if metric_field.reference == field_reference:
                 return metric_field
-        raise Exception('field reference "%s" is not associated with metric "%s"' % (field_reference,metric.name))
+
+        raise Exception('field reference "%s" is not associated with metric "%s"' % (field_reference, metric.name))
         
     
     def get_query(self, model, metric):
@@ -704,12 +793,15 @@ class metrics():
         """
         check if a collection of metrics are all graph type
         """
-        
+
+        graphs = 0
         for metric in metrics:
-            if metric.type != "graph":
+            if metric.type == "graph":
+                graphs += 1
+            if not (metric.type == "graph" or metric.type == "numeric"):
                 return False
         
-        return True
+        return graphs > 0
     
     def is_date_group(self, field):
         """
