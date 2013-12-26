@@ -30,6 +30,7 @@ openerp.unleashed.module('dashboard',function(dashboard, _, Backbone, base){
         initialize: function(options){
             this.is_printable = options.printable;
             this.search = options.search;
+            this.type = options.type;
             
             if(options.type == 'graph'){
                 // refresh the display at window resize (card #47)
@@ -52,11 +53,10 @@ openerp.unleashed.module('dashboard',function(dashboard, _, Backbone, base){
         },
         
         getItemView: function(model){
-            var type = model.get('type');
-            if(!(type in this.views)){
+            if(!(this.type in this.views)){
                 throw new Error('metic type ' + type + ' is not yet supported.');
             }       
-            return this.views[type];
+            return this.views[this.type];
         },
         
         itemViewOptions: function(model, index){
