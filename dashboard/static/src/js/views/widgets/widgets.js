@@ -1,7 +1,6 @@
 openerp.unleashed.module('dashboard',function(dashboard, _, Backbone, base){
  
-    var Widget = dashboard.views('Widget'),
-        View = Marionette.CompositeView,
+    var View = Marionette.CompositeView,
         _super = View.prototype;
 
     var WidgetsView = View.extend({
@@ -12,8 +11,8 @@ openerp.unleashed.module('dashboard',function(dashboard, _, Backbone, base){
         template: 'Dashboard.widgets',
         
         itemViewContainer: '.widgets',
-        
-        itemView: Widget,
+
+        itemView: dashboard.views('Widget'),
 
         ui: {
             widgets: '.widgets'
@@ -29,10 +28,13 @@ openerp.unleashed.module('dashboard',function(dashboard, _, Backbone, base){
         },
         
         initialize: function(options){
-            this.is_removable = !!options.removable, 
+            this.options = options;
+
+            this.is_removable = !!options.removable,
             this.is_printable = !!options.printable, 
             this.period = options.period;
             this.debug = options.debug;
+
             this.previousAnim = $.Deferred();
             this.previousAnim.resolve();
         },

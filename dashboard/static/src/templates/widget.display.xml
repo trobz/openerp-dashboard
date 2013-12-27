@@ -3,7 +3,6 @@
     <!-- NUMBER -->
     
     <t t-name="Dashboard.widget.display.numeric">
-        <dl></dl>
     </t>
     
     <t t-name="Dashboard.widget.display.numeric.item">

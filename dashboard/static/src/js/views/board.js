@@ -37,6 +37,8 @@ openerp.unleashed.module('dashboard',function(dashboard, _, Backbone, base){
                 widgets = new WidgetsView({
                     model: this.model,
                     collection: this.model.widgets,
+                    // allow Widget View overrides
+                    itemView: dashboard.views('Widget'),
                     period: this.model.period,
                     global_search: this.model.global.search,
                     debug: options.debug || false

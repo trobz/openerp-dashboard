@@ -6,8 +6,8 @@ openerp.unleashed.module('dashboard',function(dashboard, _, Backbone, base){
         _superItem = ItemView.prototype;
 
     var Numeric = ItemView.extend({
-    
-        className: 'numeric', 
+
+        className: 'numeric',
         template: 'Dashboard.widget.display.numeric.item',
 
         initialize: function(options){
@@ -54,10 +54,10 @@ openerp.unleashed.module('dashboard',function(dashboard, _, Backbone, base){
     });
     
     
-    var DisplayNumeric = Backbone.Marionette.CompositeView.extend({
+    var DisplayNumeric = Backbone.Marionette.CollectionView.extend({
 
+        tagName: 'dl',
         itemView : Numeric,
-        itemViewContainer : "dl",
         template : "Dashboard.widget.display.numeric",
 
         initialize: function(options){

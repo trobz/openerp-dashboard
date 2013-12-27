@@ -1,7 +1,6 @@
 openerp.unleashed.module('dashboard',function(dashboard, _, Backbone, base){
  
-    var Widget = dashboard.views('Widget'),
-        Widgets = dashboard.views('Widgets'),
+    var Widgets = dashboard.views('Widgets'),
         _super = Widgets.prototype;
 
     var StaticWidgetsView = Widgets.extend({

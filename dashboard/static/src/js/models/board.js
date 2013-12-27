@@ -64,8 +64,7 @@ openerp.unleashed.module('dashboard', function(dashboard, _, Backbone, base){
             
             data['period_start_at'] = moment(data['period_start_at']);
             data['period_end_at'] = moment(data['period_end_at']);
-            
-            
+
             return data;
         },
         
