@@ -1,18 +1,29 @@
 openerp.unleashed.module('dashboard', function(dashboard, _, Backbone, base){
     
     var SearchModel = dashboard.models('Search');
-
     var Metrics = dashboard.collections('Metrics');
             
+
     var BaseModel = base.models('BaseModel'),
-        _super = BaseModel.prototype;
+        _superModel = BaseModel.prototype;
     
     var PagerController = base.collections('Pager'),
         _superPager = PagerController.prototype;
-    
-    var PagerModel = PagerController.extend(_super);
-    
-    var Widget = PagerModel.extend({
+
+
+    var MixedPagerModel = function(){
+        BaseModel.apply(this, arguments);
+    };
+
+    MixedPagerModel.prototype = _.extend(
+        Object.create(_superPager),
+        Object.create(_superModel)
+    );
+
+    MixedPagerModel.prototype.constructor = MixedPagerModel;
+    MixedPagerModel.extend = BaseModel.extend;
+
+    var Widget = MixedPagerModel.extend({
         
         model_name: 'dashboard.widget',
         
@@ -39,7 +50,7 @@ openerp.unleashed.module('dashboard', function(dashboard, _, Backbone, base){
             
             this.pager.limit = data.limit ? parseInt(data.limit) : 'all';
         
-            _super.initialize.apply(this, [data, options]);
+            _superModel.initialize.apply(this, [data, options]);
         },
         
     
