@@ -27,7 +27,7 @@ class metrics():
                 {query}
             ) AS result 
             right outer join (
-                SELECT * FROM generate_series ( '{start}'::timestamp, '{end}', '{period_inc}') as gtime
+                SELECT * FROM generate_series ( '{start}'::timestamp, '{end}', '1 day') as gtime
             ) AS gdate ON result."{reference}" = date_trunc('{period}', gdate.gtime)
             group by date_trunc('{period}', gdate.gtime)
             {order}
@@ -46,7 +46,7 @@ class metrics():
             RIGHT OUTER JOIN
             (
                 SELECT *
-                FROM generate_series ('{start}'::TIMESTAMP, '{end}', '{period_inc}') AS gtime
+                FROM generate_series ('{start}'::TIMESTAMP, '{end}', '1 day') AS gtime
             ) AS gdate ON 1 = 1
             GROUP BY date_trunc('{period}', gdate.gtime), numeric_result.{reference}
             LIMIT ALL
@@ -212,8 +212,8 @@ class metrics():
             args = self.defaults_arguments(defaults, group_by, order_by, limit, offset)
             fields_domain, fields_args = self.convert_fields(metric, domain, args) 
             fields_domain = self.add_period(period, fields_domain, metric)
-            query, domain_params = self.process_query(query, fields_domain, fields_args);
-                    
+            query, domain_params = self.process_query(query, fields_domain, fields_args)
+
             params = params + domain_params
             
             stacks[metric.id] = {
@@ -349,7 +349,6 @@ class metrics():
                             "group_ref": group.reference,
                             "reference": stack['output'].reference,
                             "period": group.period,
-                            "period_inc": "1 %s" % group.period if group.period != 'quarter' else "3 %s" % "month",
                             "query": stack['query']
                         })
                     else:
@@ -402,7 +401,6 @@ class metrics():
                   "end": period['end'],
                   "reference": group.reference,
                   "period": group.period,
-                  "period_inc": "1 %s" % group.period if group.period != 'quarter' else "3 %s" % "month",
                   "output": ', '.join(outputs),
                   "order": order_by,
                   "limit": "LIMIT %s" % (limit), 
@@ -748,13 +746,11 @@ class metrics():
         """
         set default parameters if necessary
         """
-        
         arguments = {}
         arguments['group'] = copy.copy(defaults['group_by']) if 'group_by' in defaults and len(group_by) == 0 else copy.copy(group_by)
         arguments['order'] = copy.copy(defaults['order_by']) if 'order_by' in defaults and len(order_by) == 0 else copy.copy(order_by)
         arguments['limit'] = defaults['limit'] if 'limit' in defaults and limit == "ALL" else limit
         arguments['offset'] = defaults['offset'] if 'offset' in defaults and offset == 0 else offset
-          
         return arguments;
     
     
