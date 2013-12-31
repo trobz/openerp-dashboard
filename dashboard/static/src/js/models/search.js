@@ -32,9 +32,11 @@ openerp.unleashed.module('dashboard', function(dashboard, _, Backbone, base){
             if(!(search instanceof Search)){
                 throw new Error('search model can only be binded with an other seach object.');
             }
+
             search.on('set:domain', this.addDomain, this);
             search.on('remove:domain', this.removeDomain, this);
             search.on('filter:domain', this.filterDomain, this);
+            search.on('define:domain', this.defineDomain, this);
             search.on('set:group', this.addGroup, this);
             search.on('remove:group', this.removeGroup, this);
             search.on('reset:group', this.resetGroup, this);
@@ -56,17 +58,6 @@ openerp.unleashed.module('dashboard', function(dashboard, _, Backbone, base){
                     operator: operator, 
                     value: value,
                     options: options || {} 
-                });
-                this.set('domain', domain);
-                this.trigger('set:domain', field, operator, value);
-            }
-            else if (['is', 'ins'].indexOf(operator)>-1){
-                var domain = this.get('domain').slice(0);
-                domain.push({
-                    field: field,
-                    operator: operator,
-                    value: value,
-                    options: options || {}
                 });
                 this.set('domain', domain);
                 this.trigger('set:domain', field, operator, value);
@@ -95,6 +86,12 @@ openerp.unleashed.module('dashboard', function(dashboard, _, Backbone, base){
             }
             this.trigger('filter:domain', field, options);
             this.set('domain', new_domain, options)
+        },
+
+
+        defineDomain: function(domain, options){
+            this.set('domain', domain, options);
+            this.trigger('define:domain', domain);
         },
 
         getCriterion: function(field, operator, value){
