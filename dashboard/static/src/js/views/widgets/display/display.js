@@ -1,9 +1,5 @@
 openerp.unleashed.module('dashboard',function(dashboard, _, Backbone, base){
 
-    var DisplayNumeric = dashboard.views('DisplayNumeric'),
-        DisplayGraph = dashboard.views('DisplayGraph'),
-        DisplayList = dashboard.views('DisplayList');
-
     var Collection = Marionette.CollectionView,
         _super = Collection.prototype;
 
@@ -11,10 +7,12 @@ openerp.unleashed.module('dashboard',function(dashboard, _, Backbone, base){
         
         className: 'displayer',
         
-        views: {
-            'numeric': DisplayNumeric,
-            'graph': DisplayGraph,
-            'list': DisplayList,
+        views: function(){
+            return {
+                'numeric': dashboard.views('DisplayNumeric'),
+                'graph': dashboard.views('DisplayGraph'),
+                'list': dashboard.views('DisplayList')
+            };
         },
         
         
@@ -53,10 +51,11 @@ openerp.unleashed.module('dashboard',function(dashboard, _, Backbone, base){
         },
         
         getItemView: function(model){
-            if(!(this.type in this.views)){
+            var views = _.isFunction(this.views) ? this.views() : this.views;
+            if(!(this.type in views)){
                 throw new Error('metic type ' + type + ' is not yet supported.');
             }       
-            return this.views[this.type];
+            return views[this.type];
         },
         
         itemViewOptions: function(model, index){
