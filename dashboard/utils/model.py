@@ -196,7 +196,7 @@ class metrics():
         for metric in metric_ids:
             model = self.pool.get(metric.model.model)
             
-            query, params, defaults, no_result = self.get_query(model, metric)
+            query, params, vars, defaults, no_result = self.get_query(model, metric)
         
             if is_graph_metrics:
                 order_by = order_tmp
@@ -212,7 +212,7 @@ class metrics():
             args = self.defaults_arguments(defaults, group_by, order_by, limit, offset)
             fields_domain, fields_args = self.convert_fields(metric, domain, args) 
             fields_domain = self.add_period(period, fields_domain, metric)
-            query, domain_params = self.process_query(query, fields_domain, fields_args)
+            query, domain_params = self.process_query(query, fields_domain, fields_args, vars)
 
             params = params + domain_params
             
@@ -272,7 +272,7 @@ class metrics():
             fields_domain.append([period_field, '<', period['end']])
         return fields_domain
         
-    def process_query(self, query, domain, arguments):
+    def process_query(self, query, domain, arguments, vars={}):
         """
         create query and parameters for psycopg2 
         """
@@ -292,13 +292,17 @@ class metrics():
                 part = query_part % ','.join(values)
             return part
 
-        query = query.format(** {
+        data = {
             'generated': domain_query,
             'group_sql': group_sql,
             'group_ref': group_ref,
             'group_by':  complete_query(' GROUP BY %s ', sql_args['group']),
             'order_by':  complete_query(' ORDER BY %s ', sql_args['order'])
-        })
+        }
+
+        data.update(vars)
+
+        query = query.format(** data)
 
         query = '%s LIMIT %s' % (query, sql_args['limit']) if sql_args['limit'] is not None else query
         query = '%s OFFSET %s' % (query, sql_args['offset']) if sql_args['offset'] is not None else query
@@ -735,11 +739,12 @@ class metrics():
         query = model._metrics_sql[metric.query_name]
         
         params = query['params'] if isinstance(query, dict) and 'params' in query else [] 
+        vars = query['vars'] if isinstance(query, dict) and 'vars' in query else {}
         defaults = query['defaults'] if isinstance(query, dict) and 'defaults' in query else {}
         sql_query = query['query'] if isinstance(query, dict) and 'query' in query else query
         no_result = query['no_result'] if isinstance(query, dict) and 'no_result' in query else 'null::integer'
    
-        return sql_query, params, defaults, no_result
+        return sql_query, params, vars, defaults, no_result
    
     
     def defaults_arguments(self, defaults, group_by, order_by, limit, offset):
