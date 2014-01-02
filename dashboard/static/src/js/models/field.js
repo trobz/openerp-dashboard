@@ -23,16 +23,16 @@ openerp.unleashed.module('dashboard', function(dashboard, _, Backbone, base){
                     break;
                     case 'quarter':
                         var quarter = Math.floor(date.month() / 3) + 1;
-                        formatted = numeral(quarter).format('0o') + ' ' + _t('quarter') + ' ' + date.format('YYYY');
+                        formatted = 'Q' + numeral(quarter).format('0') + ' ' + date.format('YYYY');
                     break;
                     case 'month':
-                        formatted = date.format('MMMM YYYY');
+                        formatted = date.format('MMM YYYY');
                     break;
                     case 'week':
-                        formatted = date.format('wo') + ' ' + _t('week') + ' ' + moment(date).endOf('week').format('YYYY');
+                        formatted = _t('w') + '/' + date.format('w') + ' ' + moment(date).endOf('week').format('YYYY');
                     break;
                     case 'day':
-                        formatted = date.format('YYYY MMM D');
+                        formatted = date.format('D MMM YYYY');
                     break;
                 }
             }
