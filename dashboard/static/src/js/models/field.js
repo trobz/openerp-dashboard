@@ -29,7 +29,7 @@ openerp.unleashed.module('dashboard', function(dashboard, _, Backbone, base){
                         formatted = date.format('MMMM YYYY');
                     break;
                     case 'week':
-                        formatted = date.format('wo') + ' ' + _t('week') + ' ' + date.format('YYYY');
+                        formatted = date.format('wo') + ' ' + _t('week') + ' ' + moment(date).endOf('week').format('YYYY');
                     break;
                     case 'day':
                         formatted = date.format('YYYY MMM D');
