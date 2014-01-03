@@ -1,9 +1,6 @@
 openerp.unleashed.module('dashboard',function(dashboard, _, Backbone, base){
 
-    var SearchView = dashboard.views('Search'),
-        Status = dashboard.views('WidgetStatus'),
-        Display = dashboard.views('WidgetDisplay'),
-        Pager = base.views('Pager');
+    var SearchView = dashboard.views('Search');
 
     var Layout = Marionette.Layout,
         _super = Layout.prototype;
@@ -41,7 +38,11 @@ openerp.unleashed.module('dashboard',function(dashboard, _, Backbone, base){
         },
         
         initialize: function(options){
-            
+
+            var Status = dashboard.views('WidgetStatus'),
+                Display = dashboard.views('WidgetDisplay'),
+                Pager = base.views('Pager');
+
             this.resize();
             
             this.is_removable = options.removable;
