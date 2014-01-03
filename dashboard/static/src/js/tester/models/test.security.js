@@ -38,6 +38,8 @@ openerp.unleashed.module('dashboard',function(dashboard, _, Backbone, base){
         fieldValue: function(field){
             var type = field.get('field_description').type;
             var val = '';
+
+            val = type == 'many2one' ? 1 : val;
             val = type == 'char' ? 'a' : val;
             val = type == 'int' ? '1' : val;
             val = type == 'date' ? '2010-01-01' : val;

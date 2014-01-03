@@ -21,10 +21,12 @@ openerp.unleashed.module('dashboard',function(dashboard, _, Backbone, base){
                     compat = _(compatibilities[this.model.get('type')]),
                     graph_compat = null;
                     
-                    
+
+                var has_graph = !!metrics.findWhere({type: 'graph'});
+
                 metrics.each(function(metric){
                     var type = metric.get('type');
-                    if(type == 'graph'){
+                    if(type == 'graph' || (type == 'numeric' && has_graph)){
                         var graph_type = metric.get('options').type;
                         
                         graph_compat = !graph_compat ? ( _(['bar', 'line']).contains(graph_type) ? _(['bar', 'line']) : _(['pie']) ) : graph_compat;
