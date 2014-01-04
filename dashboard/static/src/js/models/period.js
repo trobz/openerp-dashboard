@@ -161,14 +161,12 @@ openerp.unleashed.module('dashboard', function(dashboard, _, Backbone, base){
             return period;
         },
         
-        values: function(format){
-            format = format || 's';
+        values: function(){
             return {
-                start: this.start(format),
-                end: this.end(format)
+                start: moment(this.start()).startOf('day').format('YYYY-MM-DD HH:mm:ss'),
+                end: moment(this.end()).endOf('day').format('YYYY-MM-DD HH:mm:ss')
             };
-        },
-        
+        }
     });
 
     dashboard.models('BoardPeriod', BoardPeriod);
