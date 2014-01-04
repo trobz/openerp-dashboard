@@ -32,7 +32,7 @@ openerp.unleashed.module('dashboard',function(dashboard, _, Backbone, base){
         },
         
         bindSearch: {
-            'numeric': ['domain'],
+            'numeric': ['domain', 'group'],
             'list':    ['domain', 'order'],
             'graph':   ['domain', 'order', 'group']
         },
