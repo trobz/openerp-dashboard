@@ -11,41 +11,31 @@ openerp.unleashed.module('dashboard', function(dashboard, _, Backbone, base){
         },
         
         parse: function(response){
-            
-            //FIXME: No solution to fetch data in the correct order on server side:
-            // - psycopg2 dictfetchall() return unsorted result
-            // - sorting on server side with a collections.OrderedDict is not correctly retrieved by JSON-RPC...
-            // finally, only sorting on client side, based on cursor.description, is possible but quiet dangerous depending of the amount of data...
-              
-            var results = response.results, desc = response.columns;
+
+            var results = response.results, columns = response.columns;
             
             // get column info
             var output_fields = this.fields.types('output'),
-                sorted = [], columns = [], field;
-            
-            _(results).each(function(result, index){
-                var item = {};
-        
-                output_fields.each(function(field){
-                    var ref_name = field.get('reference');            
-                    
-                    if(ref_name in result){
-                        var desc_index = _(desc).findIndexWhere({name: ref_name});    
-                        
-                        if(!desc_index){
-                            throw new Error('output field "' + ref_name + '" can not be found in metric.fields, please define a field with the correct reference name and "output" type');    
-                        }
-                        
-                        columns.push(field);
-                        item[ref_name] = result[ref_name];
-                    }
+                output_columns = [], field;
+
+            _(columns).each(function(column){
+                field = output_fields.find(function(field){
+                    var ref_name = field.get('reference'),
+                        pattern = new RegExp(ref_name + '(?:_[0-9]+)?');
+
+                    return pattern.test(column.name);
                 });
-        
-                sorted.push(item);
-            });    
-                
-            this.columns = columns;
-            return sorted;
+
+                if(!field){
+                    throw new Error('output field "' + column.name + '" can not be found in metric.fields, ' +
+                                    'please define a field with the correct reference name and "output" type');
+                }
+
+                output_columns.push(field);
+            });
+
+            this.columns = output_columns;
+            return results;
         }
     });
 
