@@ -138,6 +138,8 @@ openerp.unleashed.module('dashboard',function(dashboard, _, Backbone, base){
         },
         
         mode: function(type){
+            this.bindUIElements();
+
             this.type = type;
             
             this.ui.widgets.attr({
@@ -145,8 +147,9 @@ openerp.unleashed.module('dashboard',function(dashboard, _, Backbone, base){
             });
             
             if(type == 'sliding'){
+
                 var size = this.size = {
-                    width: this.ui.widgets.width(),
+                    width: this.ui.widgets.width()
                 };
                 
                 this.children.each(function(widget, index){
@@ -158,8 +161,6 @@ openerp.unleashed.module('dashboard',function(dashboard, _, Backbone, base){
                     widget.$el.find('.display').css({
                     });
                 });
-                
-                
             }
             else {
                 this.children.each(function(widget){
@@ -172,8 +173,7 @@ openerp.unleashed.module('dashboard',function(dashboard, _, Backbone, base){
                     style: ''   
                 });
             }
-            
-            
+
             _.defer($.proxy(this.refresh, this));
         },
         
