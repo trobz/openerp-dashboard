@@ -15,13 +15,13 @@ openerp.unleashed.module('dashboard',function(dashboard, _, Backbone, base){
             'click .toggle_search': 'toggleSearch',
             'click .remove_widget': 'hide',
             'mouseenter .icon-question-sign': 'toggleHelp',
-            'mouseout .icon-question-sign': 'toggleHelp',
+            'mouseout .icon-question-sign': 'toggleHelp'
         },
         
         ui: {
             loader: '.loader',
             helper: '.widget_help',
-            remove: '.remove_widget',
+            remove: '.remove_widget'
         },
         
         regions: {

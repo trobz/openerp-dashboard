@@ -12,39 +12,18 @@ openerp.unleashed.module('dashboard', function(dashboard, _, Backbone, base){
             this.defaults = {
                 domain: [],
                 order: {},
-                group: [],
+                group: []
             };
             
             this.set({
                 domain: [],
                 order: [],
-                group: [],
+                group: []
             }, {silent: true});
         
             this.operators = new Operators();
         },
 
-
-        /*
-         * bind with an other search model
-         */
-        bind: function(search){
-            if(!(search instanceof Search)){
-                throw new Error('search model can only be binded with an other seach object.');
-            }
-
-            search.on('set:domain', this.addDomain, this);
-            search.on('remove:domain', this.removeDomain, this);
-            search.on('filter:domain', this.filterDomain, this);
-            search.on('define:domain', this.defineDomain, this);
-            search.on('set:group', this.addGroup, this);
-            search.on('remove:group', this.removeGroup, this);
-            search.on('reset:group', this.resetGroup, this);
-            search.on('set:order', this.addOrder, this);
-            search.on('remove:order', this.removeOrder, this);
-            search.on('reset:group', this.resetOrder, this);
-
-        },
 
         /*
          * Domain manipulation
@@ -91,7 +70,7 @@ openerp.unleashed.module('dashboard', function(dashboard, _, Backbone, base){
 
         defineDomain: function(domain, options){
             this.set('domain', domain, options);
-            this.trigger('define:domain', domain);
+            this.trigger('define:domain', domain, options);
         },
 
         getCriterion: function(field, operator, value){
