@@ -4,9 +4,6 @@
 from openerp.osv import osv, fields
 from openerp.addons.dashboard.utils.model import metric_support #@UnresolvedImport 
 
-from base64 import b64encode
-from os import urandom
-
 class dashboard_widget(osv.osv, metric_support):
 
     _name = "dashboard.widget"
