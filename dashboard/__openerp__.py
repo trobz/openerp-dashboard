@@ -6,7 +6,7 @@
     'description': """
 Creates Interactive and customizable Dashboard, with widgets: Metric, List, Graph and Combined Graph
     """,
-    'author': 'trobz',
+    'author': 'Trobz',
     'website': 'https://github.com/trobz/openerp-dashboard',
     'depends': [
         'web_graph',
