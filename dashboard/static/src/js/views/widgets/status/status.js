@@ -1,35 +1,30 @@
 openerp.unleashed.module('dashboard',function(dashboard, _, Backbone, base){
 
 
-    var Renderer = Marionette.Renderer,
-        View = Marionette.ItemView,
-        _super = View.prototype;
+    var View = Marionette.ItemView;
 
     var WidgetStatus = View.extend({
         
         template: 'Dashboard.widget.status',
-        
+
         events: {
-            'click .metric': 'openMetric'
+            'click a.metric': 'openMetric'
         },
         
         modelEvents: {
             'change:updated_at': 'render'
         },
-        
+
         initialize: function(options){
             this.search = options.search;
         },
-        
-        render: function(){
+
+        serializeData: function(){
             var updated_at = this.model.get('updated_at');
-            var html = Renderer.render(this.template, {
+            return {
                 metrics: this.collection.toArray(),
                 updated_at: updated_at ? updated_at.format('LT') : base._t('not updated yet')
-            });
-            
-            this.$el.empty();
-            this.$el.html(html);    
+            };
         },
         
         // UI Events
@@ -39,7 +34,7 @@ openerp.unleashed.module('dashboard',function(dashboard, _, Backbone, base){
             var $clicked = $(e.currentTarget),
             	metric = this.collection.get($clicked.attr('metric-id'));
 
-            dashboard.trigger('open open:list', metric, this.search);
+            dashboard.trigger('open:list', metric, this.search);
         }
     });
 

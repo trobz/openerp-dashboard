@@ -67,7 +67,6 @@ openerp.unleashed.module('dashboard').ready(function(instance, dashboard, _, Bac
             this.panel.dashboard.directShow(this.views.board);
 
             //listen module events
-            dashboard.on('open:list',this.openList,this);
             dashboard.on('fullscreen', this.fullscreen, this);
             dashboard.on('print', this.print, this);
             dashboard.on('print:close', this.closePrint, this);
