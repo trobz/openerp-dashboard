@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+    
+        <!-- widget -->
+        
+        <record id="list_widget" model="dashboard.widget">
+            <field name="name">Employee List</field>
+            <field name="identifier">employee-list</field>
+            <field name="type">list</field>
+            <field name="method">execute</field>
+        </record>
+        
+        <record id="list_board_to_widget_number" model="dashboard.board_to_widget_rel">
+            <field name="board_id" ref="demo_dashboard_board" />
+            <field name="widget_id" ref="list_widget" />
+            <field name="sequence">20</field>
+            <field name="width">12</field>
+            <field name="height">10</field>
+        </record>
+    
+        <!-- metric -->
+        
+        <record id="list_metric_1" model="dashboard.metric">
+            <field name="name">List Employee</field>
+            <field name="type">list</field>
+       
+            <field name="query_name">list</field>
+            
+            <field name="model" ref="model_hr_employee" />
+            <field name="widget_id" ref="list_widget" />
+       
+            <field name="options" eval="{'limit': 10}" />
+            <field name="values" eval="{}"/>
+        </record>
+    
+        <!-- fields for metric 1-->
+        
+        <record id="list_metric_1_field_name" model="dashboard.field">
+            <field name="name">Name</field>
+            <field name="reference">name_related</field>
+            <field name="sequence" eval="1" />
+            <field name="sql_name">he.name_related</field>
+       
+            <field eval="[(6,0,[ref('list_metric_1')])]" name="metric_ids" />
+            <field eval="[(6,0,[ref('dashboard.type_domain'),ref('dashboard.type_output'),ref('dashboard.type_group'),ref('dashboard.type_order')])]" name="type_ids"/>
+            <field name="field_id" ref="hr.field_hr_employee_name_related"/>
+        </record>
+        
+       
+        <record id="list_metric_1_field_country_id" model="dashboard.field">
+            <field name="name">Country</field>
+            <field name="reference">country</field>
+            <field name="sequence" eval="2" />
+            <field name="sql_name">rc.name</field>
+       
+            <field eval="[(6,0,[ref('list_metric_1')])]" name="metric_ids" />
+            <field eval="[(6,0,[ref('dashboard.type_domain'),ref('dashboard.type_output'),ref('dashboard.type_group'),ref('dashboard.type_order')])]" name="type_ids"/>
+            <field name="field_id" ref="base.field_res_country_name"/>
+        </record>
+        
+        <record id="list_metric_1_field_work_email" model="dashboard.field">
+            <field name="name">Work email</field>
+            <field name="reference">work_email</field>
+            <field name="sequence" eval="4" />
+            <field name="sql_name">he.work_email</field>
+     
+            <field eval="[(6,0,[ref('list_metric_1')])]" name="metric_ids" />
+            <field eval="[(6,0,[ref('dashboard.type_domain'),ref('dashboard.type_output')])]" name="type_ids"/>
+            <field name="field_id" ref="hr.field_hr_employee_work_email"/>
+        </record>
+       
+        <record id="list_metric_1_field_birthday" model="dashboard.field">
+            <field name="name">Birthday</field>
+            <field name="reference">birthday</field>
+            <field name="sequence" eval="3" />
+            <field name="sql_name">he.birthday</field>
+       
+            <field eval="[(6,0,[ref('list_metric_1')])]" name="metric_ids" />
+            <field eval="[(6,0,[ref('dashboard.type_domain'),ref('dashboard.type_output'),ref('dashboard.type_order')])]" name="type_ids"/>
+            <field name="field_id" ref="hr.field_hr_employee_birthday"/>
+        </record>
+         
+        <record id="list_metric_1_field_manager" model="dashboard.field">
+            <field name="name">Manager</field>
+            <field name="reference">manager</field>
+            <field name="sequence" eval="5" />
+            <field name="sql_name">he.manager</field>
+       
+            <field eval="[(6,0,[ref('list_metric_1')])]" name="metric_ids" />
+            <field eval="[(6,0,[ref('dashboard.type_domain'),ref('dashboard.type_output'),ref('dashboard.type_order')])]" name="type_ids"/>
+            <field name="field_id" ref="hr_contract.field_hr_employee_manager"/>
+        </record>
+        
+         
+       <record id="list_metric_1_field_period" model="dashboard.field">
+            <field name="name">Modified At</field>
+            <field name="reference">period</field>
+            <field name="sequence">6</field>
+            <field name="sql_name">he.write_date</field>
+       
+            <field eval="[(6,0,[ref('list_metric_1')])]" name="metric_ids" />
+            <field eval="[(6,0,[ref('dashboard.type_period')])]" name="type_ids"/>
+            <field name="field_id" ref="field_hr_employee_write_date"/>
+        </record>
+         
+       
+    </data>
+</openerp>

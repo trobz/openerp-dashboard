@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+        <record id="action_view_dashboard_demo_my" model="ir.actions.act_window">
+            <field name="name">My Board</field>
+            <field name="view_mode">dashboard</field>
+            <field name="res_model">dashboard.board</field>
+            <field name="res_id" ref="demo_dashboard_board" />
+            <field name="target">inline</field>
+        </record>
+
+        <menuitem action="action_view_dashboard_demo_my" id="menu_dashboard_my" sequence="1" parent="dashboard.menu_dashboard_board" />
+
+         <record id="view_dashboard_demo" model="ir.ui.view">
+            <field name="name">dashboard.demo.view</field>
+            <field name="model">dashboard.board</field>
+            <field name="arch" type="xml">
+                <dashboard version="7.0" template="CustomBoard">
+                    <widgets static-position="True" />
+                </dashboard>
+            </field>
+        </record>
+
+
+        <record id="action_view_dashboard_sales" model="ir.actions.act_window">
+            <field name="name">Sales Board</field>
+            <field name="view_mode">dashboard</field>
+            <field name="res_model">dashboard.board</field>
+            <field name="res_id" ref="demo_sales_dashboard_board" />
+            <field name="target">inline</field>
+        </record>
+        
+        <menuitem action="action_view_dashboard_sales" id="menu_dashboard_sales" sequence="2" parent="dashboard.menu_dashboard_board" />
+        
+        
+    </data>
+</openerp>

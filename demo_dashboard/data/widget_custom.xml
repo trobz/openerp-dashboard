@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+    
+        <!-- widget 1 -->
+        
+        <record id="custom_widget_1" model="dashboard.widget">
+            <field name="name">Custom Method</field>
+            <field name="identifier">custom-method</field>
+            <field name="method">custom_execute</field>
+            <field name="type">graph</field>
+        </record>
+        
+        <record id="custom_board_to_widget_custom_1" model="dashboard.board_to_widget_rel">
+            <field name="board_id" ref="demo_dashboard_board" />
+            <field name="widget_id" ref="custom_widget_1" />
+            <field name="sequence">19</field>
+            <field name="width">6</field>
+            <field name="height">10</field>
+        </record>
+    
+        <!-- metric 1 -->
+        
+        <record id="custom_metric_1" model="dashboard.metric">
+            <field name="name">Textfile data</field>
+            <field name="type">graph</field>
+            <field name="widget_id" ref="custom_widget_1" />
+       
+            <field name="options" eval="{'type': 'bar'}" />
+            <field name="values" eval="{}"/>
+        </record>
+    
+           <!-- common to metric 1 and 2-->
+        
+        <record id="custom_metric_1_custom_name" model="dashboard.field">
+            <field name="name">Name</field>
+            <field name="reference">custom_name</field>
+            <field eval="[(6,0,[ref('custom_metric_1')])]" name="metric_ids" />
+            <field eval="[(6,0,[ref('dashboard.type_output')])]" name="type_ids"/>
+        </record>
+        
+        <record id="custom_metric_1_custom_value" model="dashboard.field">
+            <field name="name">Value</field>
+            <field name="reference">custom_value</field>
+            <field eval="[(6,0,[ref('custom_metric_1')])]" name="metric_ids" />
+            <field eval="[(6,0,[ref('dashboard.type_output')])]" name="type_ids"/>
+        </record>
+    
+    
+    <!-- widget 1 -->
+        
+        <record id="custom_widget_2" model="dashboard.widget">
+            <field name="name">Free space</field>
+            <field name="method">metric_free_space</field>
+            <field name="type">graph</field>
+        </record>
+        
+        <record id="custom_board_to_widget_custom_2" model="dashboard.board_to_widget_rel">
+            <field name="board_id" ref="demo_dashboard_board" />
+            <field name="widget_id" ref="custom_widget_2" />
+            <field name="sequence">10</field>
+            <field name="width">4</field>
+            <field name="height">10</field>
+        </record>
+        
+        <record id="custom_metric_space" model="dashboard.metric">
+            <field name="name">Disk usage</field>
+            <field name="type">graph</field>
+            <field name="widget_id" ref="custom_widget_2" />
+       
+            <field name="options" eval="{'type':'pie','format':'0.000 b'}" />
+            <field name="values" eval="{}"/>
+        </record>
+        
+        <record id="custom_metric_space_type" model="dashboard.field">
+            <field name="name">Type</field>
+            <field name="reference">type</field>
+            <field eval="[(6,0,[ref('custom_metric_space')])]" name="metric_ids" />
+            <field eval="[(6,0,[ref('dashboard.type_output')])]" name="type_ids"/>
+        </record>
+        
+        <record id="custom_metric_space_space" model="dashboard.field">
+            <field name="name">Space</field>
+            <field name="reference">space</field>
+            <field eval="[(6,0,[ref('custom_metric_space')])]" name="metric_ids" />
+            <field eval="[(6,0,[ref('dashboard.type_output')])]" name="type_ids"/>
+        </record>
+                     
+    </data>
+</openerp>

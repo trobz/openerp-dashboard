@@ -1,0 +1,30 @@
+<template>
+
+<t t-name="CustomBoard">
+    <div id="customDashboard">
+        <h1>My Pretty Custom Board</h1>
+
+        <div id="toolbar" />
+
+        <div id="widgets">
+
+            <h2>My pretty widgets</h2>
+
+            <div class="left-side">
+                <h3>Widgets on left side</h3>
+                <widget id="total-sales-pie" />
+                <widget id="employee-figures" />
+            </div>
+
+            <div class="right-side">
+                <h3>Widgets on right side</h3>
+                <widget id="total-sales" />
+                <widget id="free-space" />
+            </div>
+
+        </div>
+    </div>
+</t>
+
+
+</template>

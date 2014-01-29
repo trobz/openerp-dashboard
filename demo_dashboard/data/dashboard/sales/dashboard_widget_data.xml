@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+
+        <record id="graph_widget_sales_amount_quantity" model="dashboard.widget">
+            <field name="name">Sales Amount / Quantity</field>
+            <field name="identifier">sales-amount-quantity</field>
+            <field name="type">graph</field>
+            <field name="method">execute</field>
+        </record>
+        
+        <record id="graph_widget_sales_amount_quantity_kitchen" model="dashboard.widget">
+            <field name="name">Sales Amount / Quantity for Kitchen</field>
+            <field name="identifier">sales-amount-quantity-for-kitchen</field>
+            <field name="type">graph</field>
+            <field name="method">execute</field>
+        </record>
+        
+        <record id="graph_widget_sales_amount_by_category" model="dashboard.widget">
+            <field name="name">Sales Amount by Category</field>
+            <field name="identifier">sales-amount-by-category</field>
+            <field name="type">graph</field>
+            <field name="method">execute</field>
+        </record>
+        
+        <record id="sales_key_figures_widget" model="dashboard.widget">
+            <field name="name">Sales Key Figures</field>
+            <field name="identifier">sales-key-figures</field>
+            <field name="type">numeric</field>
+            <field name="method">execute</field>
+        </record>
+        
+        
+
+        
+    </data>
+</openerp>

@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+
+        <record id="demo_sales_dashboard_board" model="dashboard.board">
+            <field name="name">Sales Dashboard</field>
+            <field name="period_name">semester</field>
+            <field name="period_type">calendar</field>
+            <field name="global_field_refs" eval="['customer']" />
+        </record>
+        
+    </data>
+</openerp>

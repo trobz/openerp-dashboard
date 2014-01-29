@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+        
+        
+        <record id="board_to_widget_sales_key_figures" model="dashboard.board_to_widget_rel">
+            <field name="board_id" ref="demo_sales_dashboard_board" />
+            <field name="widget_id" ref="sales_key_figures_widget" />
+            <field name="sequence">1</field>
+            <field name="width">4</field>
+            <field name="height">5</field>
+        </record> 
+        
+        <record id="graph_board_to_widget_graph_sales_amount_by_category" model="dashboard.board_to_widget_rel">
+            <field name="board_id" ref="demo_sales_dashboard_board" />
+            <field name="widget_id" ref="graph_widget_sales_amount_by_category" />
+            <field name="sequence">2</field>
+            <field name="width">8</field>
+            <field name="height">5</field>
+        </record>
+        
+        <record id="graph_board_to_widget_graph_sales_amount" model="dashboard.board_to_widget_rel">
+            <field name="board_id" ref="demo_sales_dashboard_board" />
+            <field name="widget_id" ref="graph_widget_sales_amount_quantity" />
+            <field name="sequence">3</field>
+            <field name="width">12</field>
+            <field name="height">5</field>
+        </record>
+        <record id="graph_board_to_widget_graph_sales_kitchen" model="dashboard.board_to_widget_rel">
+            <field name="board_id" ref="demo_sales_dashboard_board" />
+            <field name="widget_id" ref="graph_widget_sales_amount_quantity_kitchen" />
+            <field name="sequence">4</field>
+            <field name="width">12</field>
+            <field name="height">5</field>
+        </record>
+        
+        
+        
+    </data>
+</openerp>

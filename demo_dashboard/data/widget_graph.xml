@@ -1,0 +1,235 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+    
+       
+        <!-- widget 2 -->
+        
+        <record id="graph_widget_2" model="dashboard.widget">
+            <field name="name">Total Sales</field>
+            <field name="identifier">total-sales</field>
+            <field name="method">execute</field>
+            <field name="type">graph</field>
+            <field name="limit">5</field>
+        </record>
+        
+        <record id="graph_board_to_widget_graph_2" model="dashboard.board_to_widget_rel">
+            <field name="board_id" ref="demo_dashboard_board" />
+            <field name="widget_id" ref="graph_widget_2" />
+            <field name="sequence">1</field>
+            <field name="width">8</field>
+            <field name="height">10</field>
+        </record>
+    
+    
+        <!-- widget 2 -->
+        
+        <record id="graph_widget_3" model="dashboard.widget">
+            <field name="name">Total Sales (Pie)</field>
+            <field name="method">execute</field>
+            <field name="type">graph</field>
+            <field name="limit">80</field>
+        </record>
+        
+        <record id="graph_board_to_widget_graph_3" model="dashboard.board_to_widget_rel">
+            <field name="board_id" ref="demo_dashboard_board" />
+            <field name="widget_id" ref="graph_widget_3" />
+            <field name="sequence">18</field>
+            <field name="width">6</field>
+            <field name="height">10</field>
+        </record>
+    
+       
+    
+        <!-- metric 3 -->
+        
+        <record id="graph_metric_3" model="dashboard.metric">
+            <field name="name">Total Sales Graph</field>
+            <field name="type">graph</field>
+       
+            <field name="query_name">graph_total_sales</field>
+            
+            <field name="model" ref="sale.model_sale_order_line" />
+            <field name="widget_id" ref="graph_widget_2" />
+       
+            <field name="options" eval="{'type': 'line', 'format': '$ 0,0 a'}" />
+            <field name="values" eval="{}"/>
+        </record>
+    
+        <!-- metric 4 -->
+        
+        <record id="graph_metric_4" model="dashboard.metric">
+            <field name="name">Total Sales Pie Graph</field>
+            <field name="type">graph</field>
+       
+            <field name="query_name">graph_total_sales_pie</field>
+            
+            <field name="help">only total sales of more than 10,000,000,000 VND are displayed, others are additioned into one segment.</field>
+            
+            <field name="model" ref="sale.model_sale_order_line" />
+            <field name="widget_id" ref="graph_widget_3" />
+       
+            <field name="options" eval="{'type':'pie','format':'$ 0,0 a', 'val_limit': 10000000000 ,'nb_limit':10}" />
+            <field name="values" eval="{}"/>
+        </record>
+    
+        <!-- fields for metric 3 and 4 -->
+        
+        <record id="graph_metric_3_field_company" model="dashboard.field">
+            <field name="name">Company</field>
+            <field name="reference">company</field>
+            <field name="sql_name">rco.name</field>
+
+            <field eval="[(6,0,[ref('graph_metric_3'),ref('graph_metric_4')])]" name="metric_ids" />
+            <field eval="[(6,0,[ref('dashboard.type_domain'),ref('dashboard.type_output'),ref('dashboard.type_group'),ref('dashboard.type_order')])]" name="type_ids"/>
+            <field name="field_id" ref="base.field_res_country_name"/>
+            <field name="domain_field_path">order_id.company_id.name</field>
+        </record>
+        
+        <record id="graph_metric_3_field_shop" model="dashboard.field">
+            <field name="name">Shop</field>
+            <field name="reference">shop</field>
+            <field name="sql_name">ssh.name</field>
+       
+            <field eval="[(6,0,[ref('graph_metric_3'),ref('graph_metric_4')])]" name="metric_ids" />
+            <field eval="[(6,0,[ref('dashboard.type_domain'),ref('dashboard.type_output'),ref('dashboard.type_group'),ref('dashboard.type_order')])]" name="type_ids"/>
+            <field name="field_id" ref="sale.field_sale_shop_name"/>
+            <field name="domain_field_path">order_id.shop_id.name</field>
+        </record>
+        
+        <record id="graph_metric_3_field_customer" model="dashboard.field">
+            <field name="name">Customer</field>
+            <field name="reference">customer</field>
+            <field name="sql_name">rpa.name</field>
+       
+            <field eval="[(6,0,[ref('graph_metric_3'),ref('graph_metric_4')])]" name="metric_ids" />
+            <field eval="[(6,0,[ref('dashboard.type_domain'),ref('dashboard.type_output'),ref('dashboard.type_group'),ref('dashboard.type_order')])]" name="type_ids"/>
+            
+            <field name="field_id" ref="base.field_res_partner_name"/>
+            <field name="domain_field_path">order_id.partner_id.name</field>
+        </record>
+        
+        <record id="graph_metric_3_field_department" model="dashboard.field">
+            <field name="name">Department</field>
+            <field name="reference">department</field>
+            <field name="sql_name">hde.name</field>
+       
+            <field eval="[(6,0,[ref('graph_metric_3'),ref('graph_metric_4')])]" name="metric_ids" />
+            <field eval="[(6,0,[ref('dashboard.type_domain'),ref('dashboard.type_output'),ref('dashboard.type_group'),ref('dashboard.type_order')])]" name="type_ids"/>
+            
+            <field name="field_id" ref="hr.field_hr_department_name"/>
+            <field name="domain_field_path">order_id.user_id.resource_id.department_id.name</field>
+        </record>
+       
+        <record id="graph_metric_3_field_salesman" model="dashboard.field">
+            <field name="name">Salesman</field>
+            <field name="reference">salesman</field>
+            <field name="sql_name">rre.name</field>
+       
+            <field eval="[(6,0,[ref('graph_metric_3'),ref('graph_metric_4')])]" name="metric_ids" />
+            <field eval="[(6,0,[ref('dashboard.type_domain'),ref('dashboard.type_output'),ref('dashboard.type_group'),ref('dashboard.type_order')])]" name="type_ids"/>
+            
+            <field name="field_id" ref="resource.field_resource_resource_name"/>
+            <field name="domain_field_path">order_id.user_id.name</field>
+        </record>
+       
+        <record id="graph_metric_3_field_product_category" model="dashboard.field">
+            <field name="name">Product Category</field>
+            <field name="reference">product_category</field>
+            <field name="sql_name">pca.name</field>
+       
+            <field eval="[(6,0,[ref('graph_metric_3'),ref('graph_metric_4')])]" name="metric_ids" />
+            <field eval="[(6,0,[ref('dashboard.type_domain'),ref('dashboard.type_output'),ref('dashboard.type_group'),ref('dashboard.type_order')])]" name="type_ids"/>
+            
+            <field name="field_id" ref="product.field_product_category_name"/>
+            <field name="domain_field_path">product_id.product_tmpl_id.categ_id.name</field>
+        </record>
+            
+        <record id="graph_metric_3_field_product" model="dashboard.field">
+            <field name="name">Product</field>
+            <field name="reference">product</field>
+            <field name="sql_name">pte.name</field>
+       
+            <field eval="[(6,0,[ref('graph_metric_3'),ref('graph_metric_4')])]" name="metric_ids" />
+            <field eval="[(6,0,[ref('dashboard.type_domain'),ref('dashboard.type_output'),ref('dashboard.type_group'),ref('dashboard.type_order')])]" name="type_ids"/>
+            
+            <field name="field_id" ref="product.field_product_template_name"/>
+            <field name="domain_field_path">product_id.product_tmpl_id.name</field>
+        </record>
+       
+       
+        <record id="graph_metric_3_field_total_order_year" model="dashboard.field">
+            <field name="name">Order Date - Year</field>
+            <field name="reference">order_date_year</field>
+            <field name="sql_name">date_trunc('year', sor.date_order)</field>
+       
+            <field eval="[(6,0,[ref('graph_metric_3'),ref('graph_metric_4')])]" name="metric_ids" />
+            <field eval="[(6,0,[ref('dashboard.type_output'),ref('dashboard.type_group'),ref('dashboard.type_order')])]" name="type_ids"/>
+            
+            <field name="field_id" ref="sale.field_sale_order_date_order"/>
+        </record>
+       
+        <record id="graph_metric_3_field_total_order_month" model="dashboard.field">
+            <field name="name">Order Date - Month</field>
+            <field name="reference">order_date_month</field>
+            <field name="sql_name">date_trunc('month', sor.date_order)</field>
+       
+            <field eval="[(6,0,[ref('graph_metric_3'),ref('graph_metric_4')])]" name="metric_ids" />
+            <field eval="[(6,0,[ref('dashboard.type_output'),ref('dashboard.type_group'),ref('dashboard.type_order')])]" name="type_ids"/>
+            <field name="field_id" ref="sale.field_sale_order_date_order"/>
+        </record>
+        
+        <record id="graph_metric_3_field_total_order_quarter" model="dashboard.field">
+            <field name="name">Order Date - Quarter</field>
+            <field name="reference">order_date_quarter</field>
+            <field name="sql_name">date_trunc('quarter', sor.date_order)</field>
+       
+            <field eval="[(6,0,[ref('graph_metric_3'),ref('graph_metric_4')])]" name="metric_ids" />
+            <field eval="[(6,0,[ref('dashboard.type_output'),ref('dashboard.type_group'),ref('dashboard.type_order')])]" name="type_ids"/>
+            <field name="field_id" ref="sale.field_sale_order_date_order"/>
+        </record>
+        
+        <record id="graph_metric_3_field_total_order_week" model="dashboard.field">
+            <field name="name">Order Date - Week</field>
+            <field name="reference">order_date_week</field>
+            <field name="sql_name">date_trunc('week', sor.date_order)</field>
+       
+            <field eval="[(6,0,[ref('graph_metric_3'),ref('graph_metric_4')])]" name="metric_ids" />
+            <field eval="[(6,0,[ref('dashboard.type_output'),ref('dashboard.type_group'),ref('dashboard.type_order')])]" name="type_ids"/>
+            <field name="field_id" ref="sale.field_sale_order_date_order"/>
+        </record>
+       
+        <record id="graph_metric_3_field_total_order_day" model="dashboard.field">
+            <field name="name">Order Date - Day</field>
+            <field name="reference">order_date_day</field>
+            <field name="sql_name">date_trunc('day', sor.date_order)</field>
+       
+            <field eval="[(6,0,[ref('graph_metric_3'),ref('graph_metric_4')])]" name="metric_ids" />
+            <field eval="[(6,0,[ref('dashboard.type_output'),ref('dashboard.type_group'),ref('dashboard.type_order')])]" name="type_ids"/>
+            <field name="field_id" ref="sale.field_sale_order_date_order"/>
+        </record>
+         
+         
+        <record id="graph_metric_3_field_total_period" model="dashboard.field">
+            <field name="name">Order Date</field>
+            <field name="reference">period</field>
+            <field name="sql_name">sor.date_order</field>
+       
+            <field eval="[(6,0,[ref('graph_metric_3'),ref('graph_metric_4')])]" name="metric_ids" />
+            <field eval="[(6,0,[ref('dashboard.type_period')])]" name="type_ids"/>
+            <field name="field_id" ref="sale.field_sale_order_date_order"/>
+            <field name="domain_field_path">order_id.date_order</field>
+        </record>
+       
+       
+        <record id="graph_metric_3_field_total_sales" model="dashboard.field">
+            <field name="name">Total Sales Amount</field>
+            <field name="reference">total_sales_amount</field>
+            <field name="sql_name">total_sales_amount</field>
+      
+            <field eval="[(6,0,[ref('graph_metric_3'),ref('graph_metric_4')])]" name="metric_ids" />
+            <field eval="[(6,0,[ref('dashboard.type_output'),ref('dashboard.type_order')])]" name="type_ids"/>
+        </record>
+             
+    </data>
+</openerp>

@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+        
+        <!-- widget -->
+        
+        <record id="num_widget" model="dashboard.widget">
+            <field name="name">Employee Figures</field>
+            <field name="identifier">employee-figures</field>
+            <field name="method">execute</field>
+            <field name="type">numeric</field>
+        </record>
+        
+        <record id="num_board_to_widget_numeric" model="dashboard.board_to_widget_rel">
+            <field name="board_id" ref="demo_dashboard_board" />
+            <field name="widget_id" ref="num_widget" />
+            <field name="sequence">10</field>
+            <field name="width">4</field>
+            <field name="height">10</field>
+        </record>
+        
+        <!-- metrics -->
+        
+        <record id="num_metric_1" model="dashboard.metric">
+            <field name="name">Count Employee</field>
+            <field name="type">numeric</field>
+       
+            <field name="query_name">count</field>
+            
+            <field name="model" ref="model_hr_employee" />
+            <field name="widget_id" ref="num_widget" />
+       
+            <field name="options" eval="{'format': '0.0','thresholders':{'&gt;=10': 'green', '&lt;10': 'red'}}" />
+            <field name="values" eval="{}"/>
+        </record>
+       
+        <record id="num_metric_2" model="dashboard.metric">
+            <field name="name">Custom Count Employee</field>
+            <field name="type">numeric</field>
+       
+            <field name="query_name">custom_count</field>
+            
+            <field name="model" ref="model_hr_employee" />
+            <field name="widget_id" ref="num_widget" />
+       
+            <field name="options" eval="{'format': '0.0','thresholders':{'&lt;2': 'red'}}" />
+            <field name="values" eval="{}"/>
+        </record>
+       
+        <!-- common fields -->
+        
+        <record id="num_metric_1_field_name" model="dashboard.field">
+            <field name="name">Name</field>
+            <field name="reference">name_related</field>
+            <field name="sql_name">name_related</field>
+            <field name="sequence" eval="1" />
+            
+            <field eval="[(6,0,[ref('num_metric_1'),ref('num_metric_2')])]" name="metric_ids" />
+            <field eval="[(6,0,[ref('dashboard.type_domain')])]" name="type_ids"/>
+            <field name="field_id" ref="hr.field_hr_employee_name_related"/>
+        </record>
+        
+       <record id="num_metric_1_field_period" model="dashboard.field">
+            <field name="name">Period</field>
+            <field name="reference">period</field>
+            <field name="sql_name">write_date</field>
+            <field name="sequence" eval="2" />
+            
+            <field eval="[(6,0,[ref('num_metric_1'),ref('num_metric_2')])]" name="metric_ids" />
+            <field eval="[(6,0,[ref('dashboard.type_domain'),ref('dashboard.type_period')])]" name="type_ids"/>
+            <field name="field_id" ref="field_hr_employee_write_date"/>
+       </record>
+         
+       <!-- specific for each metric -->
+         
+       <record id="num_metric_1_field_count" model="dashboard.field">
+            <field name="name">Count</field>
+            <field name="reference">count</field>
+            <field name="sql_name">count</field>
+            <field name="sequence" eval="3" />
+            
+            <field eval="[(6,0,[ref('num_metric_1')])]" name="metric_ids" />
+            <field eval="[(6,0,[ref('dashboard.type_output')])]" name="type_ids"/>
+        </record>
+         
+        <record id="num_metric_2_field_count" model="dashboard.field">
+            <field name="name">Count (start with "J")</field>
+            <field name="reference">count</field>
+            <field name="sql_name">count</field>
+            <field name="sequence" eval="3" />
+        
+            <field eval="[(6,0,[ref('num_metric_2')])]" name="metric_ids" />
+            <field eval="[(6,0,[ref('dashboard.type_output')])]" name="type_ids"/>
+        </record>
+           
+    </data>
+</openerp>

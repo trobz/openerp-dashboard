@@ -1,0 +1,39 @@
+#customDashboard {
+    width: 1200px;
+    margin: 0 auto;
+    background: #fefefe;
+}
+
+#customDashboard .right-side,
+#customDashboard .left-side {
+    width: 580px;
+}
+
+#customDashboard .right-side {
+    float: right;
+}
+
+#customDashboard .left-side {
+    float: left;
+}
+
+
+#customDashboard widget .widget {
+    width: 100% !important;
+
+}
+
+#customDashboard widget .widget_content {
+    border: none;
+    margin: 0;
+    background: transparent;
+}
+
+#customDashboard widget .head,
+#customDashboard widget .foot {
+    display: none;
+}
+
+.oe_view_manager_view_dashboard {
+    background: transparent;
+}
